@@ -60,7 +60,9 @@ export function Header() {
     <header 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4", 
-        isScrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm" : "bg-transparent"
+        isScrolled 
+          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm" 
+          : "bg-transparent text-white"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -79,7 +81,8 @@ export function Header() {
               href={item.href}
               className={cn(
                 "nav-link flex items-center",
-                activeSection === item.href.replace("#", "") && "active"
+                isScrolled ? "" : "text-white hover:text-white/80",
+                activeSection === item.href.replace("#", "") && (isScrolled ? "active" : "text-white font-medium")
               )}
               onClick={(e) => {
                 if (item.href.startsWith('#')) {
@@ -96,18 +99,21 @@ export function Header() {
             href="https://www.linkedin.com/in/shane-%C4%91%E1%BA%B7ng-a9183712b/"
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-link flex items-center"
+            className={cn(
+              "nav-link flex items-center",
+              isScrolled ? "text-primary" : "text-white"
+            )}
             aria-label="LinkedIn Profile"
           >
-            <Linkedin className="h-5 w-5 text-primary" />
+            <Linkedin className="h-5 w-5" />
           </a>
           
           {isAuthenticated ? (
-            <Button asChild variant="outline" size="sm">
+            <Button asChild variant={isScrolled ? "outline" : "ghost"} size="sm" className={!isScrolled ? "text-white border-white/40 hover:bg-white/10" : ""}>
               <Link to="/admin">Admin</Link>
             </Button>
           ) : (
-            <Button asChild variant="ghost" size="sm">
+            <Button asChild variant="ghost" size="sm" className={!isScrolled ? "text-white hover:bg-white/10" : ""}>
               <Link to="/login" className="flex items-center gap-1">
                 <LogIn className="h-4 w-4" />
                 <span>Login</span>
@@ -122,7 +128,7 @@ export function Header() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? <X /> : <Menu />}
+          {mobileMenuOpen ? <X className={!isScrolled ? "text-white" : ""} /> : <Menu className={!isScrolled ? "text-white" : ""} />}
         </button>
       </div>
       

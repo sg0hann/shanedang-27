@@ -128,7 +128,7 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-blue-300;
   }
 
   .section-title {
@@ -175,6 +175,15 @@
   
   .form-input {
     @apply w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+  
+  /* Dark background text styles */
+  .dark-bg {
+    @apply text-white;
+  }
+  
+  .dark-bg-muted {
+    @apply text-white/80;
   }
 }
 

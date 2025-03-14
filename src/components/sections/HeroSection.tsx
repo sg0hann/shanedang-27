@@ -16,16 +16,16 @@ export function HeroSection() {
       <div className="container mx-auto px-4 z-10 py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <p className="inline-block animate-fade-in bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-6">
+            <p className="inline-block animate-fade-in bg-primary/10 text-white px-4 py-1 rounded-full text-sm font-medium mb-6">
               Business Analyst Portfolio
             </p>
             
-            <h1 className="animate-slide-in-bottom text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="animate-slide-in-bottom text-4xl md:text-6xl font-bold mb-6 text-white">
               <span className="block">Đặng Mc Cormick Shane</span>
               <span className="gradient-text">Business Analyst</span>
             </h1>
             
-            <p className="animate-slide-in-bottom animate-delay-200 text-lg md:text-xl text-muted-foreground mb-10">
+            <p className="animate-slide-in-bottom animate-delay-200 text-lg md:text-xl text-white mb-10">
               A goal-driven individual with a solid grounding in Business Development, looking forward to embracing the challenges of a Business Analyst position.
             </p>
             
@@ -34,7 +34,7 @@ export function HeroSection() {
                 <Mail className="h-4 w-4" />
                 <span>Contact Me</span>
               </Button>
-              <Button variant="outline" size="lg" className="gap-2 h-12" asChild>
+              <Button variant="outline" size="lg" className="gap-2 h-12 text-white border-white/40 hover:bg-white/10" asChild>
                 <a 
                   href="https://drive.google.com/file/d/1cbCabG0ZvB0pEpNAXGG6UuHbKm8db8db/view?usp=sharing" 
                   target="_blank" 
@@ -44,21 +44,21 @@ export function HeroSection() {
                   <span>View CV</span>
                 </a>
               </Button>
-              <Button variant="ghost" size="icon" className="h-12 w-12" asChild>
+              <Button variant="ghost" size="icon" className="h-12 w-12 text-white hover:bg-white/10" asChild>
                 <a 
                   href="https://www.linkedin.com/in/shane-%C4%91%E1%BA%B7ng-a9183712b/" 
                   target="_blank" 
                   rel="noreferrer"
                   aria-label="LinkedIn Profile"
                 >
-                  <Linkedin className="h-6 w-6 text-primary" />
+                  <Linkedin className="h-6 w-6" />
                 </a>
               </Button>
             </div>
           </div>
           
           <div className="w-full lg:w-1/2 flex justify-center">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/20">
               <img 
                 src="/lovable-uploads/2d98b137-01dc-4463-a4d0-79d372619823.png"
                 alt="Shane Đặng"
@@ -71,14 +71,14 @@ export function HeroSection() {
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float">
           <a 
             href="#about" 
-            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-background shadow-md hover:shadow-lg transition-all"
+            className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm shadow-md hover:bg-white/20 transition-all"
             aria-label="Scroll down"
             onClick={(e) => {
               e.preventDefault();
               document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            <ChevronDown className="text-primary" />
+            <ChevronDown className="text-white" />
           </a>
         </div>
       </div>
