@@ -1,12 +1,12 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, FileTerminal, FileText, Github, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { projects } from "@/components/sections/ProjectsSection";
+import { getProjects } from "@/components/sections/ProjectsSection";
 import { useEffect } from "react";
 import { useAnalytics } from "@/utils/analytics";
 
@@ -14,6 +14,7 @@ type ProjectCategory = "all" | "data-analysis" | "dashboard" | "process-optimiza
 
 export function AllProjects() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
+  const [projects, setProjects] = useState([]);
   const { recordPageView } = useAnalytics();
   
   useEffect(() => {
@@ -22,6 +23,9 @@ export function AllProjects() {
     
     // Scroll to top
     window.scrollTo(0, 0);
+    
+    // Load projects
+    setProjects(getProjects());
   }, [recordPageView]);
   
   const filteredProjects = activeCategory === "all" 
@@ -82,7 +86,7 @@ export function AllProjects() {
               <Card key={index} className="project-card overflow-hidden group border-none">
                 <div className="h-48 overflow-hidden">
                   <img 
-                    src={project.image} 
+                    src={project.imageUrl || project.image} 
                     alt={project.title} 
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                   />
@@ -92,11 +96,14 @@ export function AllProjects() {
                   <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tools.map((tool, i) => (
-                      <span key={i} className="text-xs bg-secondary px-2 py-1 rounded">
-                        {tool}
-                      </span>
-                    ))}
+                    {typeof project.tools === 'string' 
+                      ? project.tools.split(',').map((tool, i) => (
+                          <span key={i} className="text-xs bg-secondary px-2 py-1 rounded">
+                            {tool.trim()}
+                          </span>
+                        ))
+                      : null
+                    }
                   </div>
                   
                   <div className="flex justify-between items-center">

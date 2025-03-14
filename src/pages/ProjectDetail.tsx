@@ -1,17 +1,18 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, FileText, Github, Globe, Link as LinkIcon } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { projects } from "@/components/sections/ProjectsSection";
+import { getProjects, Project } from "@/components/sections/ProjectsSection";
 import NotFound from "./NotFound";
 import { useAnalytics } from "@/utils/analytics";
 
 export function ProjectDetail() {
   const { projectId } = useParams<{ projectId: string }>();
   const { recordPageView } = useAnalytics();
+  const [project, setProject] = useState<Project | null>(null);
   
   useEffect(() => {
     // Record page view when component mounts
@@ -19,9 +20,12 @@ export function ProjectDetail() {
     
     // Scroll to top
     window.scrollTo(0, 0);
+    
+    // Find the project
+    const allProjects = getProjects();
+    const foundProject = allProjects.find(p => p.id === projectId);
+    setProject(foundProject || null);
   }, [projectId, recordPageView]);
-  
-  const project = projects.find(p => p.id === projectId);
   
   if (!project) {
     return <NotFound />;
@@ -45,7 +49,7 @@ export function ProjectDetail() {
           <div className="max-w-4xl mx-auto">
             <div className="mb-8 rounded-xl overflow-hidden h-80">
               <img 
-                src={project.image} 
+                src={project.imageUrl || project.image} 
                 alt={project.title}
                 className="w-full h-full object-cover object-center"
               />
@@ -54,11 +58,14 @@ export function ProjectDetail() {
             <h1 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h1>
             
             <div className="flex flex-wrap gap-2 mb-6">
-              {project.tools.map((tool, i) => (
-                <span key={i} className="bg-secondary px-3 py-1 rounded-full text-sm">
-                  {tool}
-                </span>
-              ))}
+              {typeof project.tools === 'string' 
+                ? project.tools.split(',').map((tool, i) => (
+                    <span key={i} className="bg-secondary px-3 py-1 rounded-full text-sm">
+                      {tool.trim()}
+                    </span>
+                  ))
+                : null
+              }
             </div>
             
             <div className="prose prose-lg max-w-none mb-8">
