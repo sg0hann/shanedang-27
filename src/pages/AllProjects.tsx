@@ -7,7 +7,6 @@ import { ExternalLink, FileTerminal, FileText, Github, ArrowLeft } from "lucide-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getProjects } from "@/components/sections/ProjectsSection";
-import { useEffect } from "react";
 import { useAnalytics } from "@/utils/analytics";
 
 type ProjectCategory = "all" | "data-analysis" | "dashboard" | "process-optimization";
