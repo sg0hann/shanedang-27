@@ -1,85 +1,71 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ExternalLink, FileTerminal, FileText, Github } from "lucide-react";
+import { ExternalLink, FileTerminal, FileText, Github, ArrowRight } from "lucide-react";
 
 type ProjectCategory = "all" | "data-analysis" | "dashboard" | "process-optimization";
 
-interface Project {
+export interface Project {
+  id: string;
   title: string;
   description: string;
   image: string;
   category: ProjectCategory[];
   tools: string[];
   link?: string;
+  fullDescription?: string;
 }
 
-const projects: Project[] = [
+export const projects: Project[] = [
   {
-    title: "Phân tích dữ liệu bán hàng",
-    description: "Phân tích toàn diện về dữ liệu bán hàng để xác định xu hướng, cơ hội và các lĩnh vực cần cải thiện.",
+    id: "sales-data-analysis",
+    title: "Sales Data Analysis",
+    description: "Comprehensive analysis of sales data to identify trends, opportunities, and areas for improvement.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
     category: ["data-analysis"],
     tools: ["Excel", "Power BI", "SQL"],
-    link: "#"
+    link: "#",
+    fullDescription: "This project involved analyzing 3 years of sales data across multiple regions to identify key performance trends. I created interactive dashboards showing product performance, regional variations, and seasonal patterns. The analysis led to a 15% increase in targeted marketing efficiency and helped optimize inventory management."
   },
   {
-    title: "Dashboard doanh thu",
-    description: "Xây dựng dashboard tương tác giúp lãnh đạo theo dõi KPI doanh thu theo thời gian thực.",
+    id: "revenue-dashboard",
+    title: "Revenue Dashboard",
+    description: "Built an interactive dashboard allowing executives to track revenue KPIs in real-time.",
     image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop",
     category: ["dashboard"],
     tools: ["Tableau", "SQL", "Excel"],
-    link: "#"
+    link: "#",
+    fullDescription: "I designed and implemented a comprehensive revenue tracking dashboard that provides real-time insights into company performance. The dashboard integrates data from multiple sources and presents key metrics through intuitive visualizations. This tool has become essential for executive decision-making and has improved reporting efficiency by 40%."
   },
   {
-    title: "Tối ưu quy trình vận hành",
-    description: "Phân tích và cải tiến quy trình vận hành, giảm thời gian chu kỳ và tăng hiệu quả.",
+    id: "operational-process-optimization",
+    title: "Operational Process Optimization",
+    description: "Analyzed and improved operational processes, reducing cycle time and increasing efficiency.",
     image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
     category: ["process-optimization"],
     tools: ["Visio", "JIRA", "Excel"],
-    link: "#"
-  },
-  {
-    title: "Phân tích dữ liệu khách hàng",
-    description: "Phân tích hành vi khách hàng để xác định phân khúc và cơ hội tăng trưởng.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
-    category: ["data-analysis"],
-    tools: ["Python", "SQL", "Power BI"],
-    link: "#"
-  },
-  {
-    title: "Dashboard báo cáo tài chính",
-    description: "Xây dựng hệ thống báo cáo tài chính tự động cho phép lãnh đạo theo dõi hiệu suất.",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop",
-    category: ["dashboard"],
-    tools: ["Excel", "Power BI", "SQL"],
-    link: "#"
-  },
-  {
-    title: "Tối ưu quy trình mua hàng",
-    description: "Phân tích và cải tiến quy trình mua hàng, giảm thời gian xử lý và chi phí.",
-    image: "https://images.unsplash.com/photo-1664575599736-c5197c684158?q=80&w=2070&auto=format&fit=crop",
-    category: ["process-optimization"],
-    tools: ["Visio", "Excel", "JIRA"],
-    link: "#"
+    link: "#",
+    fullDescription: "In this project, I identified bottlenecks in core operational processes by mapping current workflows and collecting performance data. After implementing process improvements and automation for repetitive tasks, we achieved a 30% reduction in processing time and significantly improved quality metrics."
   }
 ];
 
 export function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
   
-  const filteredProjects = activeCategory === "all" 
-    ? projects 
-    : projects.filter(project => project.category.includes(activeCategory));
+  // Show only first 3 projects on the homepage
+  const displayedProjects = activeCategory === "all" 
+    ? projects.slice(0, 3) 
+    : projects.filter(project => project.category.includes(activeCategory)).slice(0, 3);
   
   return (
     <section id="projects" className="py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="section-title text-center mx-auto">Dự án tiêu biểu</h2>
+          <h2 className="section-title text-center mx-auto">Featured Projects</h2>
           <p className="text-muted-foreground mt-4">
-            Một số dự án phân tích kinh doanh tiêu biểu mà tôi đã thực hiện.
+            Some of my notable business analysis projects.
           </p>
         </div>
         
@@ -88,13 +74,13 @@ export function ProjectsSection() {
             variant={activeCategory === "all" ? "default" : "outline"} 
             onClick={() => setActiveCategory("all")}
           >
-            Tất cả
+            All
           </Button>
           <Button 
             variant={activeCategory === "data-analysis" ? "default" : "outline"} 
             onClick={() => setActiveCategory("data-analysis")}
           >
-            Phân tích dữ liệu
+            Data Analysis
           </Button>
           <Button 
             variant={activeCategory === "dashboard" ? "default" : "outline"} 
@@ -106,12 +92,12 @@ export function ProjectsSection() {
             variant={activeCategory === "process-optimization" ? "default" : "outline"} 
             onClick={() => setActiveCategory("process-optimization")}
           >
-            Tối ưu quy trình
+            Process Optimization
           </Button>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
-          {filteredProjects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <Card key={index} className="project-card overflow-hidden group border-none">
               <div className="h-48 overflow-hidden">
                 <img 
@@ -147,15 +133,24 @@ export function ProjectsSection() {
                   </div>
                   
                   <Button variant="outline" size="sm" className="gap-1" asChild>
-                    <a href={project.link}>
-                      <span>Xem chi tiết</span>
+                    <Link to={`/projects/${project.id}`}>
+                      <span>View Details</span>
                       <ExternalLink className="h-3 w-3" />
-                    </a>
+                    </Link>
                   </Button>
                 </div>
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Button asChild size="lg" className="gap-2">
+            <Link to="/projects">
+              <span>View All Projects</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

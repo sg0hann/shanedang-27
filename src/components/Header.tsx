@@ -1,20 +1,15 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, LogIn } from "lucide-react";
+import { Menu, X, LogIn, User, Briefcase, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/utils/auth";
 
 const navItems = [
-  { href: "#home", label: "Trang chủ" },
-  { href: "#about", label: "Giới thiệu" },
-  { href: "#experience", label: "Kinh nghiệm" },
-  { href: "#skills", label: "Kỹ năng" },
-  { href: "#projects", label: "Dự án" },
-  { href: "#certifications", label: "Chứng chỉ" },
-  { href: "#resources", label: "Tài nguyên" },
-  { href: "#contact", label: "Liên hệ" },
+  { href: "#about", label: "About Me", icon: <User className="h-4 w-4 mr-2" /> },
+  { href: "#projects", label: "Projects", icon: <Briefcase className="h-4 w-4 mr-2" /> },
+  { href: "#contact", label: "Contact", icon: <Mail className="h-4 w-4 mr-2" /> },
 ];
 
 export function Header() {
@@ -29,7 +24,7 @@ export function Header() {
       setIsScrolled(window.scrollY > 10);
       
       // Find the current active section based on scroll position
-      const sections = navItems.map(item => item.href.replace("#", ""));
+      const sections = ["home", "about", "projects", "education", "skills", "experience", "certifications", "contact"];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (!element) return false;
@@ -70,7 +65,7 @@ export function Header() {
           to="/" 
           className="text-xl md:text-2xl font-heading font-bold gradient-text"
         >
-          Business Analyst
+          Shane Portfolio
         </Link>
         
         {/* Desktop Navigation */}
@@ -80,24 +75,25 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "nav-link",
+                "nav-link flex items-center",
                 activeSection === item.href.replace("#", "") && "active"
               )}
               onClick={(e) => scrollToSection(item.href.replace("#", ""), e)}
             >
+              {item.icon}
               {item.label}
             </a>
           ))}
           
           {isAuthenticated ? (
             <Button asChild variant="outline" size="sm">
-              <Link to="/admin">Quản trị</Link>
+              <Link to="/admin">Admin</Link>
             </Button>
           ) : (
             <Button asChild variant="ghost" size="sm">
               <Link to="/login" className="flex items-center gap-1">
                 <LogIn className="h-4 w-4" />
-                <span>Đăng nhập</span>
+                <span>Login</span>
               </Link>
             </Button>
           )}
@@ -122,26 +118,27 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "py-2 px-4 rounded-md transition-colors", 
+                  "py-2 px-4 rounded-md transition-colors flex items-center", 
                   activeSection === item.href.replace("#", "") 
                     ? "bg-primary/10 text-primary font-medium" 
                     : "hover:bg-secondary"
                 )}
                 onClick={(e) => scrollToSection(item.href.replace("#", ""), e)}
               >
+                {item.icon}
                 {item.label}
               </a>
             ))}
             
             {isAuthenticated ? (
               <Button asChild className="mt-2 w-full">
-                <Link to="/admin">Quản trị</Link>
+                <Link to="/admin">Admin</Link>
               </Button>
             ) : (
               <Button asChild variant="outline" className="mt-2 w-full">
                 <Link to="/login" className="flex items-center justify-center gap-1">
                   <LogIn className="h-4 w-4" />
-                  <span>Đăng nhập</span>
+                  <span>Login</span>
                 </Link>
               </Button>
             )}

@@ -31,11 +31,17 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-in-bottom animate-delay-300">
             <Button size="lg" className="gap-2 h-12">
               <Mail className="h-4 w-4" />
-              <span>Liên hệ ngay</span>
+              <span>Contact Me</span>
             </Button>
-            <Button variant="outline" size="lg" className="gap-2 h-12">
-              <FileText className="h-4 w-4" />
-              <span>Xem CV</span>
+            <Button variant="outline" size="lg" className="gap-2 h-12" asChild>
+              <a 
+                href="https://drive.google.com/file/d/1cbCabG0ZvB0pEpNAXGG6UuHbKm8db8db/view?usp=sharing" 
+                target="_blank" 
+                rel="noreferrer"
+              >
+                <FileText className="h-4 w-4" />
+                <span>View CV</span>
+              </a>
             </Button>
           </div>
         </div>

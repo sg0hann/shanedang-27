@@ -8,7 +8,7 @@ import ExperienceSection from "@/components/sections/ExperienceSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import CertificationsSection from "@/components/sections/CertificationsSection";
-import ResourcesSection from "@/components/sections/ResourcesSection";
+import EducationSection from "@/components/sections/EducationSection";
 import ContactSection from "@/components/sections/ContactSection";
 import { useAnalytics } from "@/utils/analytics";
 
@@ -38,10 +38,10 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <ExperienceSection />
+        <EducationSection />
         <SkillsSection />
         <ProjectsSection />
         <CertificationsSection />
-        <ResourcesSection />
         <ContactSection />
       </main>
       
