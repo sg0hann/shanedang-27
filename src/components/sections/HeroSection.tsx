@@ -20,12 +20,12 @@ export function HeroSection() {
           </p>
           
           <h1 className="animate-slide-in-bottom text-4xl md:text-6xl font-bold mb-6">
-            <span className="block">Phân tích kinh doanh</span>
-            <span className="gradient-text">chuyên nghiệp</span>
+            <span className="block">Đặng Mc Cormick Shane</span>
+            <span className="gradient-text">Business Analyst</span>
           </h1>
           
           <p className="animate-slide-in-bottom animate-delay-200 text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Giải pháp phân tích kinh doanh thông minh, hiệu quả và đáng tin cậy để giúp doanh nghiệp tối ưu hóa hiệu suất và tăng trưởng.
+            A goal-driven individual with a solid grounding in Business Development, looking forward to embracing the challenges of a Business Analyst position.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-slide-in-bottom animate-delay-300">
@@ -35,7 +35,7 @@ export function HeroSection() {
             </Button>
             <Button variant="outline" size="lg" className="gap-2 h-12">
               <FileText className="h-4 w-4" />
-              <span>Xem hồ sơ</span>
+              <span>Xem CV</span>
             </Button>
           </div>
         </div>

@@ -67,16 +67,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       
       {/* Sidebar */}
       <aside 
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-background border-r transform transition-transform duration-200 ease-in-out ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-sidebar text-sidebar-foreground border-r transform transition-transform duration-200 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between h-16 px-4 border-b">
+          <div className="flex items-center justify-between h-16 px-4 border-b border-sidebar-border">
             <Link to="/" className="flex items-center gap-2 font-semibold">
-              <span>BA Portfolio</span>
+              <span>Shane Đặng - Portfolio</span>
             </Link>
-            <Button variant="ghost" size="sm" asChild>
+            <Button variant="ghost" size="sm" asChild className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground">
               <Link to="/" className="flex items-center gap-1">
                 <ChevronLeft className="h-4 w-4" />
                 <span>Về trang chủ</span>
@@ -91,8 +91,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 to={item.path}
                 className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
                   location.pathname === item.path
-                    ? "bg-primary text-primary-foreground"
-                    : "hover:bg-muted"
+                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                    : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80 hover:text-sidebar-foreground"
                 }`}
                 onClick={() => setSidebarOpen(false)}
               >
@@ -102,7 +102,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             ))}
           </nav>
           
-          <div className="p-4 border-t">
+          <div className="p-4 border-t border-sidebar-border">
             <Button 
               variant="destructive" 
               className="w-full"

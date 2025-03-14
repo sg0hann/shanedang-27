@@ -19,15 +19,27 @@ const Index = () => {
     // Record page view
     recordPageView("/");
     
-    // Scroll to top when the page loads
+    // Ensure scroll behavior is smooth
+    document.documentElement.style.scrollBehavior = "smooth";
+    
+    // Remove any fixed position that might prevent scrolling
+    document.body.style.position = "static";
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+    
+    // Force scroll to top when the page loads
     window.scrollTo(0, 0);
+    
+    return () => {
+      document.documentElement.style.scrollBehavior = "auto";
+    };
   }, [recordPageView]);
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
       <Header />
       
-      <main className="flex-grow">
+      <main className="flex-grow overflow-x-hidden overflow-y-auto">
         <HeroSection />
         <AboutSection />
         <ExperienceSection />

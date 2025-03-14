@@ -11,39 +11,39 @@ interface Certification {
 
 const certifications: Certification[] = [
   {
-    title: "Certified Business Analysis Professional (CBAP)",
-    issuer: "International Institute of Business Analysis",
-    date: "2022",
-    description: "Chứng chỉ quốc tế cao cấp về phân tích kinh doanh, xác nhận kiến thức và kinh nghiệm trong lĩnh vực BA.",
-    link: "#"
+    title: "Google Project Management: Professional Certificate",
+    issuer: "Google",
+    date: "05/2024",
+    description: "Professional certificate in project management methodologies and best practices.",
+    link: "https://www.coursera.org/account/accomplishments/specialization/certificate/"
   },
   {
-    title: "Project Management Professional (PMP)",
-    issuer: "Project Management Institute",
-    date: "2021",
-    description: "Chứng chỉ quản lý dự án quốc tế, xác nhận năng lực lãnh đạo dự án và quản lý quy trình.",
-    link: "#"
+    title: "Automation Business Analysis - Concepts and Principles",
+    issuer: "IIBA",
+    date: "02/2024",
+    description: "Certificate focused on business analysis principles in automation contexts.",
+    link: "https://www.coursera.org/account/accomplishments/certificate/5QQNLFZGTA"
   },
   {
-    title: "Data Analysis with Python",
-    issuer: "IBM",
-    date: "2020",
-    description: "Chứng chỉ về phân tích dữ liệu sử dụng Python, bao gồm thống kê, trực quan hóa dữ liệu và mô hình dự đoán.",
-    link: "#"
+    title: "Scrum Master Certification Specialization",
+    issuer: "LearnQuest",
+    date: "02/2024",
+    description: "Specialization in Scrum methodologies and practices for agile project management.",
+    link: "https://www.coursera.org/account/accomplishments/specialization/certificate/"
   },
   {
-    title: "Microsoft Certified: Power BI Data Analyst Associate",
-    issuer: "Microsoft",
-    date: "2020",
-    description: "Chứng chỉ xác nhận kỹ năng sử dụng Power BI để biến đổi dữ liệu thành thông tin hữu ích.",
-    link: "#"
+    title: "IT Business Analyst",
+    issuer: "Mind X Technology School",
+    date: "01/2024",
+    description: "Comprehensive training in IT business analysis focusing on requirements gathering and documentation.",
+    link: "https://drive.google.com/file/d/1UaYCtbkJk5F0DAMsJdbLVaq8nOI0JvHP/vie"
   },
   {
-    title: "Agile Business Analysis",
-    issuer: "Agile Alliance",
-    date: "2019",
-    description: "Chứng chỉ tập trung vào các phương pháp phân tích kinh doanh trong môi trường Agile.",
-    link: "#"
+    title: "The Test of English for International Communication",
+    issuer: "IIG",
+    date: "11/2022",
+    description: "Certification of English language proficiency for international business communication. Score: 910/990",
+    link: "https://drive.google.com/file/d/1mFWQF8ibRc1oOu3YkF2B6QIpNusxVAVm/vie"
   }
 ];
 
@@ -54,7 +54,7 @@ export function CertificationsSection() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="section-title text-center mx-auto">Chứng chỉ & Đào tạo</h2>
           <p className="text-muted-foreground mt-4">
-            Các chứng chỉ và khóa đào tạo chuyên môn tôi đã hoàn thành để nâng cao kỹ năng và kiến thức.
+            Professional certifications and training I've completed to enhance my skills and knowledge.
           </p>
         </div>
         
@@ -86,6 +86,8 @@ export function CertificationsSection() {
                       <a 
                         href={cert.link} 
                         className="text-sm text-primary hover:text-primary/80 inline-flex items-center gap-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         <span>Xem chứng chỉ</span>
                         <ExternalLink className="h-3 w-3" />

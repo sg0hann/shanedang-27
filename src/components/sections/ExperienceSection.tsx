@@ -3,36 +3,39 @@ import { Briefcase } from "lucide-react";
 
 const experiences = [
   {
-    title: "Senior Business Analyst",
-    company: "Tech Solutions Inc.",
-    period: "2021 - Present",
-    description: "Lãnh đạo nhóm phân tích kinh doanh, làm việc với các bên liên quan cấp cao để xác định và giải quyết nhu cầu kinh doanh. Phát triển quy trình phân tích dữ liệu mạnh mẽ để hỗ trợ ra quyết định chiến lược.",
+    title: "Business Development Associate",
+    company: "Orient Software Development Corporation",
+    period: "03/2023 - 03/2024",
+    description: "Analyzed business requirements, developed specifications, and supported the implementation of software solutions. Worked closely with IT teams and stakeholders.",
     achievements: [
-      "Triển khai giải pháp BI tiết kiệm 20% chi phí hoạt động",
-      "Tự động hóa các quy trình báo cáo tiết kiệm 15 giờ mỗi tuần",
-      "Phát triển các chỉ số KPI mới dẫn đến tăng 25% hiệu suất"
+      "Experienced in discussing with clients to gather detailed software product requirements and creating comprehensive user guides",
+      "Skilled in collaborating with stakeholders to elicit, document, and analyze business needs and challenges",
+      "Utilized feedback analysis to enhance product effectiveness and user satisfaction",
+      "Worked with international teams to understand global market trends and customer requirements",
+      "Organized and delivered end-user training, ensuring clients effectively use and understand software products"
     ]
   },
   {
-    title: "Business Analyst",
-    company: "Finance Group",
-    period: "2018 - 2021",
-    description: "Phân tích yêu cầu kinh doanh, phát triển tài liệu đặc tả và hỗ trợ triển khai các giải pháp phần mềm. Làm việc chặt chẽ với đội ngũ IT và các bên liên quan.",
+    title: "Sales and Customer Management Associate",
+    company: "British Council Vietnam",
+    period: "10/2022 - 03/2023",
+    description: "Supported sales and customer management activities, created reports, and identified trends and business opportunities.",
     achievements: [
-      "Dẫn dắt dự án phân tích dữ liệu chính tạo ra giá trị 1.2M USD",
-      "Tối ưu hóa quy trình giảm 30% thời gian xử lý",
-      "Thiết kế dashboard BI được sử dụng bởi 200+ người dùng"
+      "Expertly handled telephone sales inquiries, fostering product interest and encouraging in-person consultations at the center",
+      "Responded to email inquiries with professionalism, sparking excitement and prompting visits for face-to-face consultations",
+      "Proactively informed existing customers of re-registration periods through written communication, calls, and class visits, ensuring timely awareness",
+      "Conducted follow-up calls to current customers, motivating them to re-register and meticulously updated waiting list records"
     ]
   },
   {
-    title: "Junior Data Analyst",
-    company: "Retail Solutions Co.",
-    period: "2016 - 2018",
-    description: "Hỗ trợ phân tích dữ liệu bán hàng và khách hàng, tạo báo cáo và bảng điều khiển, xác định xu hướng và cơ hội kinh doanh.",
+    title: "Air Traffic Controller",
+    company: "Vietnam Aviation Academy",
+    period: "02/2018 - 12/2022",
+    description: "Trained in air traffic control and aviation management systems",
     achievements: [
-      "Phát hiện các xu hướng dữ liệu dẫn đến tăng 10% doanh số",
-      "Phát triển báo cáo tự động tiết kiệm 5 giờ mỗi tuần",
-      "Tối ưu hóa quy trình thu thập dữ liệu tăng 15% chính xác"
+      "Completed specialized training in air traffic control protocols and procedures",
+      "Developed strong communication and decision-making skills under pressure",
+      "Gained valuable experience in coordinating complex operational systems"
     ]
   }
 ];
@@ -44,8 +47,7 @@ export function ExperienceSection() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="section-title text-center mx-auto">Kinh nghiệm làm việc</h2>
           <p className="text-muted-foreground mt-4">
-            Trải nghiệm chuyên nghiệp của tôi tập trung vào phân tích kinh doanh và 
-            data-driven decision making trong nhiều ngành khác nhau.
+            My professional experience focuses on business analysis and data-driven decision making across various industries.
           </p>
         </div>
 
@@ -67,7 +69,7 @@ export function ExperienceSection() {
                   
                   <p className="text-muted-foreground mb-4">{experience.description}</p>
                   
-                  <h4 className="font-medium text-sm uppercase text-muted-foreground mb-2">Thành tựu chính:</h4>
+                  <h4 className="font-medium text-sm uppercase text-muted-foreground mb-2">Key achievements:</h4>
                   <ul className="space-y-1">
                     {experience.achievements.map((achievement, i) => (
                       <li key={i} className="flex items-start gap-2">

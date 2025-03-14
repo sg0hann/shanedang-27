@@ -8,8 +8,7 @@ export function AboutSection() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="section-title text-center mx-auto">Giới thiệu</h2>
           <p className="text-muted-foreground mt-4">
-            Tôi là một Business Analyst với kinh nghiệm chuyên sâu trong việc phân tích dữ liệu, 
-            tối ưu hóa quy trình kinh doanh và cung cấp giải pháp dựa trên dữ liệu.
+            I am a Business Analyst with experience in analyzing business needs, optimizing processes, and providing data-driven solutions.
           </p>
         </div>
 
@@ -18,14 +17,10 @@ export function AboutSection() {
             <div className="glass-card p-8 mb-8">
               <h3 className="text-xl font-semibold mb-4">Về tôi</h3>
               <p className="text-muted-foreground mb-4">
-                Với hơn 5 năm kinh nghiệm làm việc trong lĩnh vực phân tích kinh doanh tại các công ty trong nhiều ngành khác nhau, 
-                tôi đã phát triển kỹ năng chuyên sâu trong việc phân tích dữ liệu, tối ưu hóa quy trình và cung cấp 
-                thông tin chi tiết để thúc đẩy việc ra quyết định kinh doanh.
+                I am a goal-driven individual with a solid grounding in Business Development, looking forward to embracing the challenges of a Business Analyst position. Through my tech industry experience, I have developed strong strategic planning skills essential for understanding and improving IT systems and business processes.
               </p>
               <p className="text-muted-foreground">
-                Tôi đam mê việc giải quyết các vấn đề kinh doanh phức tạp thông qua việc sử dụng dữ liệu và 
-                công nghệ một cách hiệu quả. Tôi luôn theo đuổi sự đổi mới và tìm kiếm cách để giúp doanh nghiệp 
-                phát triển thông qua việc áp dụng phân tích dữ liệu tiên tiến.
+                My target in 3 years is to become a Senior Business Analyst and in the next 5 years, I aim to become a Product Owner. I want to use what I've learned about managing projects to make sure things go smoothly. I am enthusiastic about the prospect of applying my knowledge to contribute to your company's growth through my work as a Business Analyst.
               </p>
             </div>
 
@@ -34,19 +29,19 @@ export function AboutSection() {
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-semibold">01.</span>
-                  <span>Đưa ra quyết định dựa trên dữ liệu</span>
+                  <span>Data-driven decision making</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-semibold">02.</span>
-                  <span>Liên tục học hỏi và phát triển</span>
+                  <span>Continuous learning and development</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-semibold">03.</span>
-                  <span>Tối ưu hóa quy trình kinh doanh</span>
+                  <span>Business process optimization</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-semibold">04.</span>
-                  <span>Truyền thông hiệu quả</span>
+                  <span>Effective communication</span>
                 </li>
               </ul>
             </div>
@@ -55,36 +50,35 @@ export function AboutSection() {
           <div className="grid grid-cols-2 gap-6 stagger">
             <div className="col-span-2">
               <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-6 border border-border">
-                <h3 className="text-xl font-semibold mb-4">Định vị chuyên môn</h3>
+                <h3 className="text-xl font-semibold mb-4">Professional Focus</h3>
                 <p className="text-muted-foreground">
-                  Chuyên gia phân tích kinh doanh với khả năng kết nối dữ liệu, công nghệ và nhu cầu kinh doanh 
-                  để tạo ra giá trị thực sự cho tổ chức.
+                  Business analyst specializing in connecting data, technology, and business needs to create real value for organizations.
                 </p>
               </div>
             </div>
 
             <div className="skill-card flex flex-col items-center text-center p-6">
               <Database className="text-primary mb-4 h-10 w-10" />
-              <h4 className="font-medium mb-2">Phân tích dữ liệu</h4>
-              <p className="text-sm text-muted-foreground">Chuyển đổi dữ liệu thành thông tin hữu ích</p>
+              <h4 className="font-medium mb-2">Data Analysis</h4>
+              <p className="text-sm text-muted-foreground">Transforming data into useful insights</p>
             </div>
 
             <div className="skill-card flex flex-col items-center text-center p-6">
               <PieChart className="text-primary mb-4 h-10 w-10" />
               <h4 className="font-medium mb-2">Business Intelligence</h4>
-              <p className="text-sm text-muted-foreground">Xây dựng giải pháp BI hiện đại</p>
+              <p className="text-sm text-muted-foreground">Building modern BI solutions</p>
             </div>
 
             <div className="skill-card flex flex-col items-center text-center p-6">
               <LineChart className="text-primary mb-4 h-10 w-10" />
-              <h4 className="font-medium mb-2">Phân tích báo cáo</h4>
-              <p className="text-sm text-muted-foreground">Cung cấp insights cho lãnh đạo</p>
+              <h4 className="font-medium mb-2">Report Analysis</h4>
+              <p className="text-sm text-muted-foreground">Providing insights to leadership</p>
             </div>
 
             <div className="skill-card flex flex-col items-center text-center p-6">
               <Presentation className="text-primary mb-4 h-10 w-10" />
-              <h4 className="font-medium mb-2">Tư vấn quy trình</h4>
-              <p className="text-sm text-muted-foreground">Tối ưu hóa quy trình kinh doanh</p>
+              <h4 className="font-medium mb-2">Process Consulting</h4>
+              <p className="text-sm text-muted-foreground">Optimizing business processes</p>
             </div>
           </div>
         </div>

@@ -22,12 +22,12 @@ interface SiteSettings {
 }
 
 const defaultSettings: SiteSettings = {
-  siteName: "BA Portfolio",
-  ownerName: "Nguyễn Văn A",
+  siteName: "Shane Đặng - Portfolio",
+  ownerName: "Đặng Mc Cormick Shane",
   ownerTitle: "Business Analyst",
-  aboutShort: "Chuyên gia phân tích kinh doanh với kinh nghiệm hơn 5 năm trong lĩnh vực fintech và ngân hàng.",
-  contactEmail: "example@mail.com",
-  linkedinUrl: "https://linkedin.com",
+  aboutShort: "Hi, I am a goal-driven individual with a solid grounding in Business Development, looking forward to embracing the challenges of a Business Analyst position.",
+  contactEmail: "shane.mccormick0212@gmail.com",
+  linkedinUrl: "https://linkedin.com/in/shane-%C4%91%E1%BA%B7ng-a9187312b/",
   githubUrl: "https://github.com"
 };
 
