@@ -5,19 +5,22 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Save, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useAnalytics } from "@/utils/analytics";
 import AdminLayout from "@/components/admin/AdminLayout";
 
-// Định nghĩa cấu trúc dữ liệu dự án
+// Project data structure definition
 interface Project {
   id: string;
   title: string;
   description: string;
-  technologies: string;
+  category: string[];
+  tools: string;
   imageUrl: string;
   link?: string;
+  fullDescription?: string;
 }
 
 const Projects = () => {
@@ -30,18 +33,20 @@ const Projects = () => {
     id: "",
     title: "",
     description: "",
-    technologies: "",
-    imageUrl: "/placeholder.svg"
+    category: ["all"],
+    tools: "",
+    imageUrl: "/placeholder.svg",
+    fullDescription: ""
   });
   
   const { recordPageView } = useAnalytics();
   
   useEffect(() => {
     recordPageView("/admin/projects");
-    document.title = "Quản lý dự án | Portfolio";
+    document.title = "Project Management | Portfolio";
   }, [recordPageView]);
   
-  // Lưu dự án vào localStorage mỗi khi thay đổi
+  // Save projects to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("portfolio-projects", JSON.stringify(projects));
   }, [projects]);
@@ -51,26 +56,48 @@ const Projects = () => {
     setEditingProject(prev => ({ ...prev, [name]: value }));
   };
   
+  const handleCategoryChange = (value: string) => {
+    let categories = ["all"];
+    if (value !== "all") {
+      categories.push(value);
+    }
+    setEditingProject(prev => ({ ...prev, category: categories }));
+  };
+  
+  const handleToolsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const toolsString = e.target.value;
+    setEditingProject(prev => ({ 
+      ...prev, 
+      tools: toolsString
+    }));
+  };
+  
   const handleSaveProject = () => {
     if (!editingProject.title || !editingProject.description) {
-      toast.error("Vui lòng điền đầy đủ thông tin dự án");
+      toast.error("Please fill in all required project information");
       return;
     }
     
+    // Convert comma-separated tools string to an array if needed
+    const processedProject = {
+      ...editingProject,
+      tools: editingProject.tools
+    };
+    
     if (editingProject.id) {
-      // Cập nhật dự án đã tồn tại
+      // Update existing project
       setProjects(projects.map(p => 
-        p.id === editingProject.id ? editingProject : p
+        p.id === editingProject.id ? processedProject : p
       ));
-      toast.success("Cập nhật dự án thành công");
+      toast.success("Project updated successfully");
     } else {
-      // Thêm dự án mới
+      // Add new project
       const newProject = {
-        ...editingProject,
+        ...processedProject,
         id: crypto.randomUUID()
       };
       setProjects([...projects, newProject]);
-      toast.success("Thêm dự án mới thành công");
+      toast.success("New project added successfully");
     }
     
     // Reset form
@@ -78,8 +105,10 @@ const Projects = () => {
       id: "",
       title: "",
       description: "",
-      technologies: "",
-      imageUrl: "/placeholder.svg"
+      category: ["all"],
+      tools: "",
+      imageUrl: "/placeholder.svg",
+      fullDescription: ""
     });
   };
   
@@ -88,7 +117,7 @@ const Projects = () => {
   };
   
   const handleDeleteProject = (id: string) => {
-    if (confirm("Bạn có chắc chắn muốn xóa dự án này không?")) {
+    if (confirm("Are you sure you want to delete this project?")) {
       setProjects(projects.filter(p => p.id !== id));
       
       if (editingProject.id === id) {
@@ -96,12 +125,14 @@ const Projects = () => {
           id: "",
           title: "",
           description: "",
-          technologies: "",
-          imageUrl: "/placeholder.svg"
+          category: ["all"],
+          tools: "",
+          imageUrl: "/placeholder.svg",
+          fullDescription: ""
         });
       }
       
-      toast.success("Đã xóa dự án");
+      toast.success("Project deleted");
     }
   };
   
@@ -109,9 +140,9 @@ const Projects = () => {
     <AdminLayout>
       <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold">Quản lý dự án</h1>
+          <h1 className="text-3xl font-bold">Project Management</h1>
           <p className="text-muted-foreground">
-            Thêm, chỉnh sửa và xóa các dự án trong portfolio
+            Add, edit, and delete projects in your portfolio
           </p>
         </div>
         
@@ -119,12 +150,12 @@ const Projects = () => {
           <div className="lg:col-span-2">
             <Card>
               <CardHeader>
-                <CardTitle>Danh sách dự án</CardTitle>
+                <CardTitle>Project List</CardTitle>
               </CardHeader>
               <CardContent>
                 {projects.length === 0 ? (
                   <div className="text-center py-6 text-muted-foreground">
-                    Chưa có dự án nào. Hãy thêm dự án mới!
+                    No projects yet. Add your first project!
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -143,9 +174,13 @@ const Projects = () => {
                             <p className="text-sm text-muted-foreground line-clamp-2">
                               {project.description}
                             </p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              {project.technologies}
-                            </p>
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              {project.tools.split(',').map((tool, i) => (
+                                <span key={i} className="text-xs bg-secondary px-2 py-0.5 rounded">
+                                  {tool.trim()}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
                         <div className="flex gap-2">
@@ -154,7 +189,7 @@ const Projects = () => {
                             variant="outline"
                             onClick={() => handleEditProject(project)}
                           >
-                            Sửa
+                            Edit
                           </Button>
                           <Button 
                             size="sm" 
@@ -175,58 +210,89 @@ const Projects = () => {
           <Card>
             <CardHeader>
               <CardTitle>
-                {editingProject.id ? "Chỉnh sửa dự án" : "Thêm dự án mới"}
+                {editingProject.id ? "Edit Project" : "Add New Project"}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleSaveProject(); }}>
                 <div className="space-y-2">
-                  <Label htmlFor="title">Tên dự án</Label>
+                  <Label htmlFor="title">Project Title</Label>
                   <Input
                     id="title"
                     name="title"
                     value={editingProject.title}
                     onChange={handleInputChange}
-                    placeholder="Nhập tên dự án"
+                    placeholder="Enter project title"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="description">Mô tả</Label>
+                  <Label htmlFor="description">Short Description</Label>
                   <Textarea
                     id="description"
                     name="description"
                     value={editingProject.description}
                     onChange={handleInputChange}
-                    placeholder="Mô tả dự án"
-                    rows={4}
+                    placeholder="Brief project description"
+                    rows={2}
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="technologies">Công nghệ sử dụng</Label>
-                  <Input
-                    id="technologies"
-                    name="technologies"
-                    value={editingProject.technologies}
+                  <Label htmlFor="fullDescription">Full Description</Label>
+                  <Textarea
+                    id="fullDescription"
+                    name="fullDescription"
+                    value={editingProject.fullDescription || ""}
                     onChange={handleInputChange}
-                    placeholder="SQL, Excel, Power BI,..."
+                    placeholder="Detailed project description"
+                    rows={5}
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="imageUrl">URL hình ảnh</Label>
+                  <Label htmlFor="category">Project Category</Label>
+                  <Select 
+                    onValueChange={handleCategoryChange} 
+                    defaultValue="all"
+                    value={editingProject.category[editingProject.category.length - 1]}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
+                      <SelectItem value="data-analysis">Data Analysis</SelectItem>
+                      <SelectItem value="dashboard">Dashboard</SelectItem>
+                      <SelectItem value="process-optimization">Process Optimization</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="tools">Technologies & Tools</Label>
+                  <Input
+                    id="tools"
+                    name="tools"
+                    value={editingProject.tools}
+                    onChange={handleToolsChange}
+                    placeholder="SQL, Excel, Power BI,... (comma separated)"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="imageUrl">Image URL</Label>
                   <Input
                     id="imageUrl"
                     name="imageUrl"
                     value={editingProject.imageUrl}
                     onChange={handleInputChange}
-                    placeholder="URL hình ảnh dự án"
+                    placeholder="Project image URL"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="link">Link dự án (không bắt buộc)</Label>
+                  <Label htmlFor="link">Project Link (optional)</Label>
                   <Input
                     id="link"
                     name="link"
@@ -240,12 +306,12 @@ const Projects = () => {
                   {editingProject.id ? (
                     <span className="flex items-center gap-2">
                       <Save className="h-4 w-4" />
-                      Cập nhật dự án
+                      Update Project
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
                       <Plus className="h-4 w-4" />
-                      Thêm dự án mới
+                      Add New Project
                     </span>
                   )}
                 </Button>
@@ -259,11 +325,13 @@ const Projects = () => {
                       id: "",
                       title: "",
                       description: "",
-                      technologies: "",
-                      imageUrl: "/placeholder.svg"
+                      category: ["all"],
+                      tools: "",
+                      imageUrl: "/placeholder.svg",
+                      fullDescription: ""
                     })}
                   >
-                    Hủy chỉnh sửa
+                    Cancel Editing
                   </Button>
                 )}
               </form>

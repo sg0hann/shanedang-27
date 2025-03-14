@@ -3,10 +3,10 @@ import { Database, LineChart, PieChart, Presentation } from "lucide-react";
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-secondary/50">
+    <section id="about" className="py-20 bg-blue-950">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="section-title text-center mx-auto">Giới thiệu</h2>
+          <h2 className="section-title text-center mx-auto">About Me</h2>
           <p className="text-muted-foreground mt-4">
             I am a Business Analyst with experience in analyzing business needs, optimizing processes, and providing data-driven solutions.
           </p>
@@ -15,7 +15,7 @@ export function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="stagger">
             <div className="glass-card p-8 mb-8">
-              <h3 className="text-xl font-semibold mb-4">Về tôi</h3>
+              <h3 className="text-xl font-semibold mb-4">About Me</h3>
               <p className="text-muted-foreground mb-4">
                 I am a goal-driven individual with a solid grounding in Business Development, looking forward to embracing the challenges of a Business Analyst position. Through my tech industry experience, I have developed strong strategic planning skills essential for understanding and improving IT systems and business processes.
               </p>
@@ -25,7 +25,7 @@ export function AboutSection() {
             </div>
 
             <div className="glass-card p-8">
-              <h3 className="text-xl font-semibold mb-4">Giá trị cốt lõi</h3>
+              <h3 className="text-xl font-semibold mb-4">Core Values</h3>
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <span className="text-primary font-semibold">01.</span>

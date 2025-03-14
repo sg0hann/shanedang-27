@@ -25,10 +25,49 @@ const Index = () => {
     // Force scroll to top when the page loads
     window.scrollTo(0, 0);
     
+    // Check if there's a hash in the URL and scroll to that section
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          const yOffset = -80;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }, 500);
+      }
+    }
+    
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
-  }, []); // Empty dependency array to run only once
+  }, []); 
+  
+  // Handle smooth scrolling for anchor links
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      
+      if (anchor && anchor.hash && anchor.hash.startsWith('#') && anchor.pathname === window.location.pathname) {
+        e.preventDefault();
+        const id = anchor.hash.substring(1);
+        const element = document.getElementById(id);
+        
+        if (element) {
+          const yOffset = -80;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }
+    };
+    
+    document.addEventListener('click', handleAnchorClick);
+    
+    return () => {
+      document.removeEventListener('click', handleAnchorClick);
+    };
+  }, []);
   
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden">

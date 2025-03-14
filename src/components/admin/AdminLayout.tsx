@@ -35,12 +35,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       path: "/admin"
     },
     {
-      name: "Dự án",
+      name: "Projects",
       icon: <FolderKanban className="h-5 w-5" />,
       path: "/admin/projects"
     },
     {
-      name: "Cài đặt",
+      name: "Settings",
       icon: <SettingsIcon className="h-5 w-5" />,
       path: "/admin/settings"
     }
@@ -79,7 +79,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             <Button variant="ghost" size="sm" asChild className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground">
               <Link to="/" className="flex items-center gap-1">
                 <ChevronLeft className="h-4 w-4" />
-                <span>Về trang chủ</span>
+                <span>Back to Home</span>
               </Link>
             </Button>
           </div>
@@ -110,7 +110,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             >
               <span className="flex items-center gap-2">
                 <LogOut className="h-4 w-4" />
-                Đăng xuất
+                Logout
               </span>
             </Button>
           </div>

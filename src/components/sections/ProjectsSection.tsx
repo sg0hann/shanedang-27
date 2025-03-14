@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,53 +11,66 @@ export interface Project {
   id: string;
   title: string;
   description: string;
-  image: string;
-  category: ProjectCategory[];
-  tools: string[];
+  image?: string;
+  imageUrl?: string;
+  category: string[];
+  tools: string;
   link?: string;
   fullDescription?: string;
 }
 
-export const projects: Project[] = [
-  {
-    id: "sales-data-analysis",
-    title: "Sales Data Analysis",
-    description: "Comprehensive analysis of sales data to identify trends, opportunities, and areas for improvement.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    category: ["data-analysis"],
-    tools: ["Excel", "Power BI", "SQL"],
-    link: "#",
-    fullDescription: "This project involved analyzing 3 years of sales data across multiple regions to identify key performance trends. I created interactive dashboards showing product performance, regional variations, and seasonal patterns. The analysis led to a 15% increase in targeted marketing efficiency and helped optimize inventory management."
-  },
-  {
-    id: "revenue-dashboard",
-    title: "Revenue Dashboard",
-    description: "Built an interactive dashboard allowing executives to track revenue KPIs in real-time.",
-    image: "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop",
-    category: ["dashboard"],
-    tools: ["Tableau", "SQL", "Excel"],
-    link: "#",
-    fullDescription: "I designed and implemented a comprehensive revenue tracking dashboard that provides real-time insights into company performance. The dashboard integrates data from multiple sources and presents key metrics through intuitive visualizations. This tool has become essential for executive decision-making and has improved reporting efficiency by 40%."
-  },
-  {
-    id: "operational-process-optimization",
-    title: "Operational Process Optimization",
-    description: "Analyzed and improved operational processes, reducing cycle time and increasing efficiency.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
-    category: ["process-optimization"],
-    tools: ["Visio", "JIRA", "Excel"],
-    link: "#",
-    fullDescription: "In this project, I identified bottlenecks in core operational processes by mapping current workflows and collecting performance data. After implementing process improvements and automation for repetitive tasks, we achieved a 30% reduction in processing time and significantly improved quality metrics."
-  }
-];
-
 export function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
+  const [projectsData, setProjectsData] = useState<Project[]>([]);
+  
+  // Fetch projects from localStorage
+  useEffect(() => {
+    const savedProjects = localStorage.getItem("portfolio-projects");
+    const loadedProjects = savedProjects ? JSON.parse(savedProjects) : [];
+    
+    if (loadedProjects.length > 0) {
+      setProjectsData(loadedProjects);
+    } else {
+      // Default projects if none are in localStorage
+      setProjectsData([
+        {
+          id: "sales-data-analysis",
+          title: "Sales Data Analysis",
+          description: "Comprehensive analysis of sales data to identify trends, opportunities, and areas for improvement.",
+          imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+          category: ["all", "data-analysis"],
+          tools: "Excel, Power BI, SQL",
+          link: "#",
+          fullDescription: "This project involved analyzing 3 years of sales data across multiple regions to identify key performance trends. I created interactive dashboards showing product performance, regional variations, and seasonal patterns. The analysis led to a 15% increase in targeted marketing efficiency and helped optimize inventory management."
+        },
+        {
+          id: "revenue-dashboard",
+          title: "Revenue Dashboard",
+          description: "Built an interactive dashboard allowing executives to track revenue KPIs in real-time.",
+          imageUrl: "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop",
+          category: ["all", "dashboard"],
+          tools: "Tableau, SQL, Excel",
+          link: "#",
+          fullDescription: "I designed and implemented a comprehensive revenue tracking dashboard that provides real-time insights into company performance. The dashboard integrates data from multiple sources and presents key metrics through intuitive visualizations. This tool has become essential for executive decision-making and has improved reporting efficiency by 40%."
+        },
+        {
+          id: "operational-process-optimization",
+          title: "Operational Process Optimization",
+          description: "Analyzed and improved operational processes, reducing cycle time and increasing efficiency.",
+          imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
+          category: ["all", "process-optimization"],
+          tools: "Visio, JIRA, Excel",
+          link: "#",
+          fullDescription: "In this project, I identified bottlenecks in core operational processes by mapping current workflows and collecting performance data. After implementing process improvements and automation for repetitive tasks, we achieved a 30% reduction in processing time and significantly improved quality metrics."
+        }
+      ]);
+    }
+  }, []);
   
   // Show only first 3 projects on the homepage
   const displayedProjects = activeCategory === "all" 
-    ? projects.slice(0, 3) 
-    : projects.filter(project => project.category.includes(activeCategory)).slice(0, 3);
+    ? projectsData.slice(0, 3) 
+    : projectsData.filter(project => project.category.includes(activeCategory)).slice(0, 3);
   
   return (
     <section id="projects" className="py-20">
@@ -101,7 +114,7 @@ export function ProjectsSection() {
             <Card key={index} className="project-card overflow-hidden group border-none">
               <div className="h-48 overflow-hidden">
                 <img 
-                  src={project.image} 
+                  src={project.imageUrl || project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                 />
@@ -111,11 +124,18 @@ export function ProjectsSection() {
                 <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tools.map((tool, i) => (
-                    <span key={i} className="text-xs bg-secondary px-2 py-1 rounded">
-                      {tool}
-                    </span>
-                  ))}
+                  {typeof project.tools === 'string' 
+                    ? project.tools.split(',').map((tool, i) => (
+                        <span key={i} className="text-xs bg-secondary px-2 py-1 rounded">
+                          {tool.trim()}
+                        </span>
+                      ))
+                    : project.tools.map((tool, i) => (
+                        <span key={i} className="text-xs bg-secondary px-2 py-1 rounded">
+                          {tool}
+                        </span>
+                      ))
+                  }
                 </div>
                 
                 <div className="flex justify-between items-center">

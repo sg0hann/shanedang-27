@@ -1,14 +1,14 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, LogIn, User, Briefcase, Mail } from "lucide-react";
+import { Menu, X, LogIn, User, Briefcase, Mail, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/utils/auth";
 
 const navItems = [
   { href: "#about", label: "About Me", icon: <User className="h-4 w-4 mr-2" /> },
-  { href: "#projects", label: "Projects", icon: <Briefcase className="h-4 w-4 mr-2" /> },
+  { href: "/projects", label: "Projects", icon: <Briefcase className="h-4 w-4 mr-2" /> },
   { href: "#contact", label: "Contact", icon: <Mail className="h-4 w-4 mr-2" /> },
 ];
 
@@ -44,6 +44,9 @@ export function Header() {
 
   const scrollToSection = (sectionId: string, e: React.MouseEvent) => {
     e.preventDefault();
+    if (sectionId.startsWith("#")) {
+      sectionId = sectionId.substring(1);
+    }
     const section = document.getElementById(sectionId);
     if (section) {
       const yOffset = -80; // Adjust for header height
@@ -78,12 +81,26 @@ export function Header() {
                 "nav-link flex items-center",
                 activeSection === item.href.replace("#", "") && "active"
               )}
-              onClick={(e) => scrollToSection(item.href.replace("#", ""), e)}
+              onClick={(e) => {
+                if (item.href.startsWith('#')) {
+                  scrollToSection(item.href, e);
+                }
+              }}
             >
               {item.icon}
               {item.label}
             </a>
           ))}
+          
+          <a
+            href="https://www.linkedin.com/in/shane-%C4%91%E1%BA%B7ng-a9183712b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link flex items-center"
+            aria-label="LinkedIn Profile"
+          >
+            <Linkedin className="h-5 w-5 text-primary" />
+          </a>
           
           {isAuthenticated ? (
             <Button asChild variant="outline" size="sm">
@@ -123,12 +140,26 @@ export function Header() {
                     ? "bg-primary/10 text-primary font-medium" 
                     : "hover:bg-secondary"
                 )}
-                onClick={(e) => scrollToSection(item.href.replace("#", ""), e)}
+                onClick={(e) => {
+                  if (item.href.startsWith('#')) {
+                    scrollToSection(item.href, e);
+                  }
+                }}
               >
                 {item.icon}
                 {item.label}
               </a>
             ))}
+            
+            <a
+              href="https://www.linkedin.com/in/shane-%C4%91%E1%BA%B7ng-a9183712b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2 px-4 rounded-md transition-colors flex items-center"
+            >
+              <Linkedin className="h-4 w-4 mr-2" />
+              LinkedIn
+            </a>
             
             {isAuthenticated ? (
               <Button asChild className="mt-2 w-full">

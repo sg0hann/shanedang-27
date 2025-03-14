@@ -24,59 +24,59 @@ const Dashboard = () => {
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground">
-            Tổng quan về hoạt động của trang web
+            Overview of website activities and analytics
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Lượt truy cập</CardTitle>
+              <CardTitle className="text-sm font-medium">Visits</CardTitle>
               <BarChart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{visitorData.totalVisits}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                Tổng lượt người dùng ghé thăm
+                Total user visits
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Người dùng</CardTitle>
+              <CardTitle className="text-sm font-medium">Unique Users</CardTitle>
               <UsersRound className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{visitorData.uniqueVisitors}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                Tổng số người dùng duy nhất
+                Total unique visitors
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Lượt xem trang</CardTitle>
+              <CardTitle className="text-sm font-medium">Page Views</CardTitle>
               <MousePointerClick className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{totalPageViews}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                Tổng lượt xem tất cả trang
+                Total views across all pages
               </p>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Yêu cầu liên hệ</CardTitle>
+              <CardTitle className="text-sm font-medium">Contact Requests</CardTitle>
               <MessageSquare className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{visitorData.contactRequests?.length || 0}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                Số lượng tin nhắn đã nhận
+                Number of messages received
               </p>
             </CardContent>
           </Card>
@@ -84,22 +84,22 @@ const Dashboard = () => {
         
         <Card className="col-span-1 md:col-span-2 lg:col-span-4">
           <CardHeader>
-            <CardTitle>Phân tích lượt xem theo trang</CardTitle>
+            <CardTitle>Page View Analysis</CardTitle>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="table">
               <TabsList>
-                <TabsTrigger value="table">Bảng</TabsTrigger>
-                <TabsTrigger value="chart">Biểu đồ</TabsTrigger>
-                <TabsTrigger value="contacts">Tin nhắn</TabsTrigger>
+                <TabsTrigger value="table">Table</TabsTrigger>
+                <TabsTrigger value="chart">Chart</TabsTrigger>
+                <TabsTrigger value="contacts">Contact Messages</TabsTrigger>
               </TabsList>
               <TabsContent value="table" className="space-y-4">
                 <div className="rounded-md border">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b bg-muted/50">
-                        <th className="h-10 px-4 text-left font-medium">Đường dẫn</th>
-                        <th className="h-10 px-4 text-right font-medium">Lượt xem</th>
+                        <th className="h-10 px-4 text-left font-medium">Path</th>
+                        <th className="h-10 px-4 text-right font-medium">Views</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -115,7 +115,7 @@ const Dashboard = () => {
               </TabsContent>
               <TabsContent value="chart">
                 <div className="h-[300px] flex items-center justify-center border rounded-md">
-                  <p className="text-muted-foreground">Biểu đồ dữ liệu sẽ hiển thị ở đây</p>
+                  <p className="text-muted-foreground">Data chart will be displayed here</p>
                 </div>
               </TabsContent>
               <TabsContent value="contacts" className="space-y-4">
@@ -124,10 +124,10 @@ const Dashboard = () => {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b bg-muted/50">
-                          <th className="h-10 px-4 text-left font-medium">Tên</th>
+                          <th className="h-10 px-4 text-left font-medium">Name</th>
                           <th className="h-10 px-4 text-left font-medium">Email</th>
-                          <th className="h-10 px-4 text-left font-medium">Tin nhắn</th>
-                          <th className="h-10 px-4 text-right font-medium">Ngày</th>
+                          <th className="h-10 px-4 text-left font-medium">Message</th>
+                          <th className="h-10 px-4 text-right font-medium">Date</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -144,7 +144,7 @@ const Dashboard = () => {
                   </div>
                 ) : (
                   <div className="flex items-center justify-center h-40 border rounded-md">
-                    <p className="text-muted-foreground">Chưa có tin nhắn nào được gửi</p>
+                    <p className="text-muted-foreground">No messages have been sent yet</p>
                   </div>
                 )}
               </TabsContent>

@@ -13,19 +13,19 @@ interface Education {
 const educationData: Education[] = [
   {
     degree: "Bachelor of Business and Management",
-    institution: "Ton Duc Thang University",
+    institution: "University of Economics",
     location: "Ho Chi Minh City, Vietnam",
     period: "2016 - 2020",
     description: "Focused on business administration, strategic management, and data analysis principles. GPA: 7.9/10",
-    link: "https://tdtu.edu.vn/en"
+    link: "https://www.ueh.edu.vn/"
   },
   {
-    degree: "English Language Program",
-    institution: "Wall Street English",
+    degree: "Aviation Management",
+    institution: "Vietnam Aviation Academy",
     location: "Ho Chi Minh City, Vietnam",
     period: "2018 - 2019",
-    description: "Completed advanced English language training with focus on business communication.",
-    link: "https://www.wallstreetenglish.com/"
+    description: "Specialized training in aviation management, airline operations, and industry regulations.",
+    link: "https://vaa.edu.vn/"
   }
 ];
 
