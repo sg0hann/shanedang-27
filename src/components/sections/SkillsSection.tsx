@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -6,7 +5,7 @@ import {
   BarChart,
   FileSpreadsheet,
   LineChart,
-  PresentationChart,
+  Presentation,
   FileText,
   Zap,
   Users,
@@ -31,7 +30,7 @@ const skills: Skill[] = [
   { name: "Data Analysis", icon: <BarChart className="h-5 w-5" />, level: 85, category: "technical" },
   { name: "Excel", icon: <FileSpreadsheet className="h-5 w-5" />, level: 95, category: "technical" },
   { name: "Power BI", icon: <LineChart className="h-5 w-5" />, level: 80, category: "technical" },
-  { name: "Tableau", icon: <PresentationChart className="h-5 w-5" />, level: 75, category: "technical" },
+  { name: "Tableau", icon: <Presentation className="h-5 w-5" />, level: 75, category: "technical" },
   { name: "Business Documentation", icon: <FileText className="h-5 w-5" />, level: 90, category: "technical" },
   
   // Soft Skills
