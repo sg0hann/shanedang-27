@@ -16,16 +16,11 @@ const Index = () => {
   const { recordPageView } = useAnalytics();
   
   useEffect(() => {
-    // Record page view
+    // Record page view - only once when component mounts
     recordPageView("/");
     
     // Ensure scroll behavior is smooth
     document.documentElement.style.scrollBehavior = "smooth";
-    
-    // Remove any fixed position that might prevent scrolling
-    document.body.style.position = "static";
-    document.body.style.overflow = "auto";
-    document.body.style.height = "auto";
     
     // Force scroll to top when the page loads
     window.scrollTo(0, 0);
@@ -33,13 +28,13 @@ const Index = () => {
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
-  }, [recordPageView]);
+  }, []); // Empty dependency array to run only once
   
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden">
       <Header />
       
-      <main className="flex-grow overflow-x-hidden overflow-y-auto">
+      <main className="flex-grow">
         <HeroSection />
         <AboutSection />
         <ExperienceSection />

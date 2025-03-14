@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/utils/auth";
 import { useAnalytics } from "@/utils/analytics";
-import { BarChart, UsersRound, Clock, MousePointerClick } from "lucide-react";
+import { BarChart, UsersRound, Clock, MousePointerClick, MessageSquare } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
 
 const Dashboard = () => {
@@ -70,15 +70,13 @@ const Dashboard = () => {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Cập nhật gần nhất</CardTitle>
-              <Clock className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Yêu cầu liên hệ</CardTitle>
+              <MessageSquare className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
-                {new Date(visitorData.lastUpdated).toLocaleDateString()}
-              </div>
+              <div className="text-2xl font-bold">{visitorData.contactRequests?.length || 0}</div>
               <p className="text-xs text-muted-foreground mt-1">
-                Lần cuối cập nhật dữ liệu
+                Số lượng tin nhắn đã nhận
               </p>
             </CardContent>
           </Card>
@@ -93,6 +91,7 @@ const Dashboard = () => {
               <TabsList>
                 <TabsTrigger value="table">Bảng</TabsTrigger>
                 <TabsTrigger value="chart">Biểu đồ</TabsTrigger>
+                <TabsTrigger value="contacts">Tin nhắn</TabsTrigger>
               </TabsList>
               <TabsContent value="table" className="space-y-4">
                 <div className="rounded-md border">
@@ -118,6 +117,36 @@ const Dashboard = () => {
                 <div className="h-[300px] flex items-center justify-center border rounded-md">
                   <p className="text-muted-foreground">Biểu đồ dữ liệu sẽ hiển thị ở đây</p>
                 </div>
+              </TabsContent>
+              <TabsContent value="contacts" className="space-y-4">
+                {visitorData.contactRequests && visitorData.contactRequests.length > 0 ? (
+                  <div className="rounded-md border">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b bg-muted/50">
+                          <th className="h-10 px-4 text-left font-medium">Tên</th>
+                          <th className="h-10 px-4 text-left font-medium">Email</th>
+                          <th className="h-10 px-4 text-left font-medium">Tin nhắn</th>
+                          <th className="h-10 px-4 text-right font-medium">Ngày</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {visitorData.contactRequests.map((request, index) => (
+                          <tr key={index} className="border-b">
+                            <td className="p-4">{request.name}</td>
+                            <td className="p-4">{request.email}</td>
+                            <td className="p-4">{request.message}</td>
+                            <td className="p-4 text-right">{new Date(request.date).toLocaleDateString()}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center h-40 border rounded-md">
+                    <p className="text-muted-foreground">Chưa có tin nhắn nào được gửi</p>
+                  </div>
+                )}
               </TabsContent>
             </Tabs>
           </CardContent>

@@ -6,18 +6,28 @@ type VisitorData = {
   uniqueVisitors: number;
   pageViews: Record<string, number>;
   lastUpdated: string;
+  contactRequests: ContactRequest[];
+};
+
+export type ContactRequest = {
+  name: string;
+  email: string;
+  message: string;
+  date: string;
 };
 
 type AnalyticsContextType = {
   visitorData: VisitorData;
   recordPageView: (path: string) => void;
+  addContactRequest: (request: Omit<ContactRequest, "date">) => void;
 };
 
 const defaultVisitorData: VisitorData = {
   totalVisits: 0,
   uniqueVisitors: 0,
   pageViews: {},
-  lastUpdated: new Date().toISOString()
+  lastUpdated: new Date().toISOString(),
+  contactRequests: []
 };
 
 const AnalyticsContext = createContext<AnalyticsContextType | undefined>(undefined);
@@ -58,9 +68,23 @@ export const AnalyticsProvider = ({ children }: { children: ReactNode }) => {
       };
     });
   };
+  
+  const addContactRequest = (request: Omit<ContactRequest, "date">) => {
+    setVisitorData(prev => {
+      const newRequest: ContactRequest = {
+        ...request,
+        date: new Date().toISOString()
+      };
+      
+      return {
+        ...prev,
+        contactRequests: [...prev.contactRequests, newRequest]
+      };
+    });
+  };
 
   return (
-    <AnalyticsContext.Provider value={{ visitorData, recordPageView }}>
+    <AnalyticsContext.Provider value={{ visitorData, recordPageView, addContactRequest }}>
       {children}
     </AnalyticsContext.Provider>
   );

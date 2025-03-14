@@ -47,6 +47,17 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const yOffset = -80; // Adjust for header height
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      setMobileMenuOpen(false);
+    }
+  };
+
   return (
     <header 
       className={cn(
@@ -72,10 +83,7 @@ export function Header() {
                 "nav-link",
                 activeSection === item.href.replace("#", "") && "active"
               )}
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
-              }}
+              onClick={(e) => scrollToSection(item.href.replace("#", ""), e)}
             >
               {item.label}
             </a>
@@ -119,11 +127,7 @@ export function Header() {
                     ? "bg-primary/10 text-primary font-medium" 
                     : "hover:bg-secondary"
                 )}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
-                  setMobileMenuOpen(false);
-                }}
+                onClick={(e) => scrollToSection(item.href.replace("#", ""), e)}
               >
                 {item.label}
               </a>
