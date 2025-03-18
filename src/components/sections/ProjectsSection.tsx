@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ExternalLink, FileTerminal, FileText, Github, ArrowRight } from "lucide-react";
 
-type ProjectCategory = "all" | "data-analysis" | "dashboard" | "process-optimization";
+type ProjectCategory = "all" | "website" | "mobile-app" | "dashboard-cms";
 
 export interface Project {
   id: string;
@@ -34,7 +34,7 @@ export const getProjects = (): Project[] => {
         title: "Sales Data Analysis",
         description: "Comprehensive analysis of sales data to identify trends, opportunities, and areas for improvement.",
         imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-        category: ["all", "data-analysis"],
+        category: ["all", "dashboard-cms"],
         tools: "Excel, Power BI, SQL",
         link: "#",
         fullDescription: "This project involved analyzing 3 years of sales data across multiple regions to identify key performance trends. I created interactive dashboards showing product performance, regional variations, and seasonal patterns. The analysis led to a 15% increase in targeted marketing efficiency and helped optimize inventory management."
@@ -44,20 +44,30 @@ export const getProjects = (): Project[] => {
         title: "Revenue Dashboard",
         description: "Built an interactive dashboard allowing executives to track revenue KPIs in real-time.",
         imageUrl: "https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop",
-        category: ["all", "dashboard"],
+        category: ["all", "dashboard-cms"],
         tools: "Tableau, SQL, Excel",
         link: "#",
         fullDescription: "I designed and implemented a comprehensive revenue tracking dashboard that provides real-time insights into company performance. The dashboard integrates data from multiple sources and presents key metrics through intuitive visualizations. This tool has become essential for executive decision-making and has improved reporting efficiency by 40%."
       },
       {
-        id: "operational-process-optimization",
-        title: "Operational Process Optimization",
-        description: "Analyzed and improved operational processes, reducing cycle time and increasing efficiency.",
-        imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
-        category: ["all", "process-optimization"],
-        tools: "Visio, JIRA, Excel",
+        id: "e-commerce-website",
+        title: "E-Commerce Website",
+        description: "Developed requirements for an e-commerce platform with integrated analytics and customer tracking.",
+        imageUrl: "https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=2070&auto=format&fit=crop",
+        category: ["all", "website"],
+        tools: "Figma, JIRA, SQL",
         link: "#",
-        fullDescription: "In this project, I identified bottlenecks in core operational processes by mapping current workflows and collecting performance data. After implementing process improvements and automation for repetitive tasks, we achieved a 30% reduction in processing time and significantly improved quality metrics."
+        fullDescription: "Led the business analysis phase for a major e-commerce website rebuild. I gathered requirements from stakeholders, developed user stories, and coordinated with the development team to ensure business needs were properly implemented. The completed website saw a 35% increase in conversion rates."
+      },
+      {
+        id: "mobile-app-analytics",
+        title: "Mobile App Analytics",
+        description: "Created analytics framework for a mobile application to track user engagement and feature adoption.",
+        imageUrl: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=2074&auto=format&fit=crop",
+        category: ["all", "mobile-app"],
+        tools: "Google Analytics, Firebase, Tableau",
+        link: "#",
+        fullDescription: "Designed and implemented an analytics strategy for a mobile application with over 500,000 users. The solution tracked key user interactions, feature adoption, and retention metrics. Insights from this data helped prioritize feature development and improved user retention by 28%."
       }
     ];
   }
@@ -83,7 +93,7 @@ export function ProjectsSection() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="section-title text-center mx-auto">Featured Projects</h2>
           <p className="text-muted-foreground mt-4">
-            Some of my notable business analysis projects.
+            Some of my notable business analysis projects
           </p>
         </div>
         
@@ -95,22 +105,22 @@ export function ProjectsSection() {
             All
           </Button>
           <Button 
-            variant={activeCategory === "data-analysis" ? "default" : "outline"} 
-            onClick={() => setActiveCategory("data-analysis")}
+            variant={activeCategory === "website" ? "default" : "outline"} 
+            onClick={() => setActiveCategory("website")}
           >
-            Data Analysis
+            Website
           </Button>
           <Button 
-            variant={activeCategory === "dashboard" ? "default" : "outline"} 
-            onClick={() => setActiveCategory("dashboard")}
+            variant={activeCategory === "mobile-app" ? "default" : "outline"} 
+            onClick={() => setActiveCategory("mobile-app")}
           >
-            Dashboard
+            Mobile App
           </Button>
           <Button 
-            variant={activeCategory === "process-optimization" ? "default" : "outline"} 
-            onClick={() => setActiveCategory("process-optimization")}
+            variant={activeCategory === "dashboard-cms" ? "default" : "outline"} 
+            onClick={() => setActiveCategory("dashboard-cms")}
           >
-            Process Optimization
+            Dashboard - CMS
           </Button>
         </div>
         

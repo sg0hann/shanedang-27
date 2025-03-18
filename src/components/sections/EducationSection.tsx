@@ -15,7 +15,7 @@ const educationData: Education[] = [
     degree: "International Business",
     institution: "University of Economics Ho Chi Minh City",
     location: "Ho Chi Minh City, Vietnam",
-    period: "07/2022 - 11/2024",
+    period: "07/2022 - 06/2025",
     description: "Focused on business administration, strategic management, and international business principles.",
     link: "https://www.ueh.edu.vn/"
   },

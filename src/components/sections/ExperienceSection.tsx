@@ -30,17 +30,6 @@ const experiences = [
       "Proactively informed existing customers of re-registration periods through written communication, calls, and class visits, ensuring timely awareness",
       "Conducted follow-up calls to current customers, motivating them to re-register and meticulously updated waiting list records"
     ]
-  },
-  {
-    title: "Air Traffic Controller",
-    company: "Vietnam Aviation Academy",
-    period: "02/2018 - 12/2022",
-    description: "Trained in air traffic control and aviation management systems.",
-    achievements: [
-      "Completed specialized training in air traffic control protocols and procedures",
-      "Developed strong communication and decision-making skills under pressure",
-      "Gained valuable experience in coordinating complex operational systems"
-    ]
   }
 ];
 
@@ -49,7 +38,7 @@ export function ExperienceSection() {
     <section id="experience" className="py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="section-title text-center mx-auto">Kinh nghiệm làm việc</h2>
+          <h2 className="section-title text-center mx-auto">Work Experience</h2>
           <p className="text-muted-foreground mt-4">
             My professional experience focuses on business analysis and data-driven decision making across various industries.
           </p>

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,8 +47,8 @@ const skills: Skill[] = [
   { name: "Agile Methodologies", icon: <Zap className="h-5 w-5" />, level: 85, category: "tools" },
   
   // Languages
-  { name: "Tiếng Việt", icon: <Languages className="h-5 w-5" />, level: 100, category: "languages" },
-  { name: "Tiếng Anh", icon: <Languages className="h-5 w-5" />, level: 85, category: "languages" },
+  { name: "Vietnamese", icon: <Languages className="h-5 w-5" />, level: 100, category: "languages" },
+  { name: "English", icon: <Languages className="h-5 w-5" />, level: 85, category: "languages" },
 ];
 
 export function SkillsSection() {
@@ -59,9 +60,9 @@ export function SkillsSection() {
     <section id="skills" className="py-20 bg-secondary/50">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="section-title text-center mx-auto">Kỹ năng</h2>
+          <h2 className="section-title text-center mx-auto">Skills</h2>
           <p className="text-muted-foreground mt-4">
-            Kỹ năng chuyên môn và năng lực cốt lõi trong lĩnh vực phân tích kinh doanh.
+            Professional skills and core competencies in business analysis
           </p>
         </div>
         
@@ -71,28 +72,28 @@ export function SkillsSection() {
             onClick={() => setActiveCategory("technical")}
             className="transition-all duration-300"
           >
-            Kỹ thuật
+            Technical
           </Button>
           <Button 
             variant={activeCategory === "soft" ? "default" : "outline"} 
             onClick={() => setActiveCategory("soft")}
             className="transition-all duration-300"
           >
-            Kỹ năng mềm
+            Soft Skills
           </Button>
           <Button 
             variant={activeCategory === "tools" ? "default" : "outline"} 
             onClick={() => setActiveCategory("tools")}
             className="transition-all duration-300"
           >
-            Công cụ
+            Tools
           </Button>
           <Button 
             variant={activeCategory === "languages" ? "default" : "outline"} 
             onClick={() => setActiveCategory("languages")}
             className="transition-all duration-300"
           >
-            Ngôn ngữ
+            Languages
           </Button>
         </div>
         

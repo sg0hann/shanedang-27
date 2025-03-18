@@ -31,8 +31,8 @@ export function ContactSection() {
     // Validate form
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Vui lòng điền đầy đủ thông tin",
-        description: "Tất cả các trường là bắt buộc",
+        title: "Please fill in all fields",
+        description: "All fields are required",
         variant: "destructive"
       });
       setIsSubmitting(false);
@@ -48,8 +48,8 @@ export function ContactSection() {
     
     // Show success message
     toast({
-      title: "Gửi tin nhắn thành công!",
-      description: "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.",
+      title: "Message sent successfully!",
+      description: "Thank you for reaching out. I will respond as soon as possible.",
       variant: "default"
     });
     
@@ -67,9 +67,9 @@ export function ContactSection() {
     <section id="contact" className="py-20 bg-secondary/10">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Liên hệ</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Me</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Nếu bạn muốn trao đổi về cơ hội hợp tác hoặc có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với tôi.
+            If you would like to discuss collaboration opportunities or have any questions, feel free to reach out.
           </p>
         </div>
         
@@ -81,9 +81,9 @@ export function ContactSection() {
               </div>
               <div>
                 <h3 className="text-lg font-medium mb-1">Email</h3>
-                <p className="text-muted-foreground">dangshane@gmail.com</p>
-                <a href="mailto:dangshane@gmail.com" className="text-primary text-sm hover:underline">
-                  Gửi email
+                <p className="text-muted-foreground">shane.mccormick0212@gmail.com</p>
+                <a href="mailto:shane.mccormick0212@gmail.com" className="text-primary text-sm hover:underline">
+                  Send an email
                 </a>
               </div>
             </div>
@@ -93,8 +93,8 @@ export function ContactSection() {
                 <MapPin className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-1">Vị trí</h3>
-                <p className="text-muted-foreground">Tp. Hồ Chí Minh, Việt Nam</p>
+                <h3 className="text-lg font-medium mb-1">Location</h3>
+                <p className="text-muted-foreground">Ho Chi Minh City, Vietnam</p>
               </div>
             </div>
             
@@ -103,10 +103,10 @@ export function ContactSection() {
                 <Phone className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-lg font-medium mb-1">Điện thoại</h3>
-                <p className="text-muted-foreground">+84 38 676 4689</p>
-                <a href="tel:+84386764689" className="text-primary text-sm hover:underline">
-                  Gọi ngay
+                <h3 className="text-lg font-medium mb-1">Phone</h3>
+                <p className="text-muted-foreground">0978493317</p>
+                <a href="tel:0978493317" className="text-primary text-sm hover:underline">
+                  Call now
                 </a>
               </div>
             </div>
@@ -115,14 +115,14 @@ export function ContactSection() {
           <form onSubmit={handleSubmit} className="space-y-6 bg-card p-6 rounded-lg shadow-sm border">
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-1">
-                Họ và tên
+                Full Name
               </label>
               <Input
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Nhập họ và tên của bạn"
+                placeholder="Enter your full name"
               />
             </div>
             
@@ -142,14 +142,14 @@ export function ContactSection() {
             
             <div>
               <label htmlFor="message" className="block text-sm font-medium mb-1">
-                Tin nhắn
+                Message
               </label>
               <Textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Nhập nội dung tin nhắn của bạn"
+                placeholder="Enter your message"
                 rows={5}
               />
             </div>
@@ -160,7 +160,7 @@ export function ContactSection() {
               disabled={isSubmitting}
             >
               <Send className="mr-2 h-4 w-4" />
-              {isSubmitting ? "Đang gửi..." : "Gửi tin nhắn"}
+              {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </div>
