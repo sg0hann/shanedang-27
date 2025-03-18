@@ -2,17 +2,19 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar, ExternalLink, FileCode } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getProjects, Project } from "@/components/sections/ProjectsSection";
 import NotFound from "./NotFound";
 import { useAnalytics } from "@/utils/analytics";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function ProjectDetail() {
   const { projectId } = useParams<{ projectId: string }>();
   const { recordPageView } = useAnalytics();
   const [project, setProject] = useState<Project | null>(null);
+  const [activeTab, setActiveTab] = useState("overview");
   
   useEffect(() => {
     // Record page view when component mounts
@@ -55,7 +57,27 @@ export function ProjectDetail() {
               />
             </div>
             
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h1>
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <h1 className="text-3xl md:text-4xl font-bold">{project.title}</h1>
+              <div className="flex gap-2">
+                {project.docsLink && (
+                  <Button variant="outline" size="sm" asChild className="gap-1">
+                    <a href={project.docsLink} target="_blank" rel="noopener noreferrer">
+                      <FileCode className="h-4 w-4" />
+                      <span>Documentation</span>
+                    </a>
+                  </Button>
+                )}
+                {project.demoLink && (
+                  <Button variant="outline" size="sm" asChild className="gap-1">
+                    <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4" />
+                      <span>Live Demo</span>
+                    </a>
+                  </Button>
+                )}
+              </div>
+            </div>
             
             <div className="flex flex-wrap gap-2 mb-6">
               {typeof project.tools === 'string' 
@@ -72,31 +94,38 @@ export function ProjectDetail() {
               <p className="text-lg leading-relaxed">
                 {project.fullDescription || project.description}
               </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">Project Overview</h2>
-              <p>
-                This business analysis project demonstrates my skills in data collection, 
-                analysis, and visualization to solve complex business problems and provide 
-                actionable insights for stakeholders.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">Methodology</h2>
-              <ul className="list-disc pl-6 space-y-2">
-                <li>Requirement gathering through stakeholder interviews</li>
-                <li>Data collection and cleaning from multiple sources</li>
-                <li>In-depth analysis using statistical methods</li>
-                <li>Development of interactive visualizations</li>
-                <li>Implementation of recommended solutions</li>
-                <li>Monitoring results and continuous improvement</li>
-              </ul>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">Outcomes & Results</h2>
-              <p>
-                The project successfully addressed key business challenges and delivered 
-                measurable improvements in efficiency, decision-making processes, and overall 
-                performance metrics.
-              </p>
             </div>
+            
+            {project.media && project.media.length > 0 && (
+              <div className="mt-10">
+                <h2 className="text-2xl font-semibold mb-6">Project Gallery</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {project.media.map((media, index) => (
+                    <div key={index} className="rounded-lg overflow-hidden border">
+                      {media.type === 'image' ? (
+                        <img 
+                          src={media.url} 
+                          alt={`${project.title} - Image ${index + 1}`}
+                          className="w-full h-64 object-cover"
+                        />
+                      ) : (
+                        <div className="h-64 bg-black">
+                          <iframe 
+                            src={media.url.includes('youtube') 
+                              ? media.url.replace('watch?v=', 'embed/') 
+                              : media.url
+                            } 
+                            className="w-full h-full" 
+                            allowFullScreen
+                            title={`${project.title} - Video ${index + 1}`}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </main>
