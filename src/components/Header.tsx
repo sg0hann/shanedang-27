@@ -64,33 +64,27 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4", 
         isScrolled 
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm" 
+          ? "bg-background/80 backdrop-blur-md border-b border-border" 
           : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link 
           to="/" 
-          className={cn(
-            "text-xl md:text-2xl font-heading font-bold",
-            isScrolled ? "text-foreground" : "text-white"
-          )}
+          className="text-xl md:text-2xl font-heading font-bold flex items-center"
         >
-          Shane<span className="text-blue-500">.Portfolio</span>
+          Shane<span className="text-accent">.Portfolio</span>
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               className={cn(
-                "nav-link flex items-center text-sm font-medium transition-colors",
-                isScrolled 
-                  ? (activeSection === item.href.replace("#", "") ? "text-primary" : "text-foreground/80") 
-                  : (activeSection === item.href.replace("#", "") ? "text-blue-300" : "text-white/90"),
-                "hover:text-primary"
+                "text-sm font-medium transition-colors hover:text-accent",
+                activeSection === item.href.replace("#", "") ? "text-accent" : "text-foreground/80"
               )}
               onClick={(e) => {
                 if (item.href.startsWith('#')) {
@@ -106,21 +100,18 @@ export function Header() {
             href="https://www.linkedin.com/in/shane-%C4%91%E1%BA%B7ng-a9183712b/"
             target="_blank"
             rel="noopener noreferrer"
-            className={cn(
-              "p-2 rounded-full transition-colors",
-              isScrolled ? "text-blue-500 hover:bg-blue-50" : "text-blue-300 hover:bg-white/10"
-            )}
+            className="text-foreground/80 hover:text-accent transition-colors"
             aria-label="LinkedIn Profile"
           >
             <Linkedin className="h-5 w-5" />
           </a>
           
           {isAuthenticated ? (
-            <Button asChild variant="outline" size="sm" className={!isScrolled && !mobileMenuOpen ? "border-white/40 text-white hover:bg-white/10" : ""}>
+            <Button asChild variant="outline" size="sm" className="bg-accent/10 border-accent/30 text-accent hover:bg-accent/20">
               <Link to="/admin">Admin</Link>
             </Button>
           ) : (
-            <Button asChild variant="ghost" size="sm" className={!isScrolled && !mobileMenuOpen ? "text-white hover:bg-white/10" : ""}>
+            <Button asChild variant="ghost" size="sm" className="hover:bg-accent/10 hover:text-accent">
               <Link to="/login" className="flex items-center gap-1">
                 <LogIn className="h-4 w-4" />
                 <span>Login</span>
@@ -131,21 +122,18 @@ export function Header() {
         
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden p-2 rounded-full"
+          className="md:hidden p-2 rounded-md bg-card/50 border border-border"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? 
-            <X className={isScrolled ? "text-foreground" : "text-white"} /> : 
-            <Menu className={isScrolled ? "text-foreground" : "text-white"} />
-          }
+          {mobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
       
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border shadow-md animate-slide-in-top">
-          <nav className="container mx-auto py-4 px-6 flex flex-col space-y-2">
+          <nav className="container mx-auto py-4 px-6 flex flex-col space-y-1">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -153,7 +141,7 @@ export function Header() {
                 className={cn(
                   "py-2 px-4 rounded-md transition-colors flex items-center", 
                   activeSection === item.href.replace("#", "") 
-                    ? "bg-primary/10 text-primary font-medium" 
+                    ? "bg-accent/10 text-accent font-medium" 
                     : "hover:bg-secondary"
                 )}
                 onClick={(e) => {
@@ -178,7 +166,7 @@ export function Header() {
             </a>
             
             {isAuthenticated ? (
-              <Button asChild className="mt-2 w-full">
+              <Button asChild className="mt-2 w-full bg-accent text-background hover:bg-accent/90">
                 <Link to="/admin">Admin</Link>
               </Button>
             ) : (

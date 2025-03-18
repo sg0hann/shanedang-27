@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, ExternalLink, FileCode } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -34,13 +35,13 @@ export function ProjectDetail() {
   }
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background">
       <Header />
       
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <Button variant="ghost" asChild className="gap-2">
+            <Button variant="ghost" asChild className="gap-2 hover:bg-accent/10 hover:text-accent">
               <Link to="/projects">
                 <ArrowLeft className="h-4 w-4" />
                 <span>Back to Projects</span>
@@ -49,7 +50,7 @@ export function ProjectDetail() {
           </div>
           
           <div className="max-w-4xl mx-auto">
-            <div className="mb-8 rounded-xl overflow-hidden h-80">
+            <div className="mb-8 rounded-xl overflow-hidden h-80 border border-border">
               <img 
                 src={project.imageUrl || project.image} 
                 alt={project.title}
@@ -58,10 +59,15 @@ export function ProjectDetail() {
             </div>
             
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <h1 className="text-3xl md:text-4xl font-bold">{project.title}</h1>
+              <div>
+                <Badge variant="outline" className="mb-3 bg-accent/10 backdrop-blur-sm border-accent/20 text-accent px-4 py-1.5">
+                  {project.category[0]}
+                </Badge>
+                <h1 className="text-3xl md:text-4xl font-bold">{project.title}</h1>
+              </div>
               <div className="flex gap-2">
                 {project.docsLink && (
-                  <Button variant="outline" size="sm" asChild className="gap-1">
+                  <Button variant="outline" size="sm" asChild className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent">
                     <a href={project.docsLink} target="_blank" rel="noopener noreferrer">
                       <FileCode className="h-4 w-4" />
                       <span>Documentation</span>
@@ -69,7 +75,7 @@ export function ProjectDetail() {
                   </Button>
                 )}
                 {project.demoLink && (
-                  <Button variant="outline" size="sm" asChild className="gap-1">
+                  <Button variant="outline" size="sm" asChild className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent">
                     <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4" />
                       <span>Live Demo</span>
@@ -82,7 +88,7 @@ export function ProjectDetail() {
             <div className="flex flex-wrap gap-2 mb-6">
               {typeof project.tools === 'string' 
                 ? project.tools.split(',').map((tool, i) => (
-                    <span key={i} className="bg-secondary px-3 py-1 rounded-full text-sm">
+                    <span key={i} className="bg-secondary/50 px-3 py-1 rounded-full text-sm">
                       {tool.trim()}
                     </span>
                   ))
@@ -90,7 +96,7 @@ export function ProjectDetail() {
               }
             </div>
             
-            <div className="prose prose-lg max-w-none mb-8">
+            <div className="prose prose-lg max-w-none mb-8 text-foreground/90">
               <p className="text-lg leading-relaxed">
                 {project.fullDescription || project.description}
               </p>
@@ -99,9 +105,9 @@ export function ProjectDetail() {
             {project.media && project.media.length > 0 && (
               <div className="mt-10">
                 <h2 className="text-2xl font-semibold mb-6">Project Gallery</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {project.media.map((media, index) => (
-                    <div key={index} className="rounded-lg overflow-hidden border">
+                    <div key={index} className="rounded-lg overflow-hidden border border-border bg-card hover:border-accent/30 transition-all">
                       {media.type === 'image' ? (
                         <img 
                           src={media.url} 

@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Database,
   BarChart,
@@ -57,67 +58,73 @@ export function SkillsSection() {
   const filteredSkills = skills.filter(skill => skill.category === activeCategory);
   
   return (
-    <section id="skills" className="py-20 bg-secondary/50">
+    <section id="skills" className="py-24">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="section-title text-center mx-auto">Skills</h2>
-          <p className="text-muted-foreground mt-4">
-            Professional skills and core competencies in business analysis
-          </p>
-        </div>
-        
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          <Button 
-            variant={activeCategory === "technical" ? "default" : "outline"} 
-            onClick={() => setActiveCategory("technical")}
-            className="transition-all duration-300"
-          >
-            Technical
-          </Button>
-          <Button 
-            variant={activeCategory === "soft" ? "default" : "outline"} 
-            onClick={() => setActiveCategory("soft")}
-            className="transition-all duration-300"
-          >
-            Soft Skills
-          </Button>
-          <Button 
-            variant={activeCategory === "tools" ? "default" : "outline"} 
-            onClick={() => setActiveCategory("tools")}
-            className="transition-all duration-300"
-          >
-            Tools
-          </Button>
-          <Button 
-            variant={activeCategory === "languages" ? "default" : "outline"} 
-            onClick={() => setActiveCategory("languages")}
-            className="transition-all duration-300"
-          >
-            Languages
-          </Button>
-        </div>
-        
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="text-center mb-16">
+            <Badge variant="outline" className="mb-4 bg-accent/10 backdrop-blur-sm border-accent/20 text-accent px-4 py-1.5">
+              My Skills
+            </Badge>
+            <h2 className="section-title text-center mx-auto">
+              Let's Explore Popular <span className="text-accent">Skills & Experience</span>
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              Professional skills and core competencies in business analysis
+            </p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            <Button 
+              variant={activeCategory === "technical" ? "default" : "outline"} 
+              onClick={() => setActiveCategory("technical")}
+              className={activeCategory === "technical" ? "bg-accent text-background hover:bg-accent/90" : ""}
+            >
+              Technical
+            </Button>
+            <Button 
+              variant={activeCategory === "soft" ? "default" : "outline"} 
+              onClick={() => setActiveCategory("soft")}
+              className={activeCategory === "soft" ? "bg-accent text-background hover:bg-accent/90" : ""}
+            >
+              Soft Skills
+            </Button>
+            <Button 
+              variant={activeCategory === "tools" ? "default" : "outline"} 
+              onClick={() => setActiveCategory("tools")}
+              className={activeCategory === "tools" ? "bg-accent text-background hover:bg-accent/90" : ""}
+            >
+              Tools
+            </Button>
+            <Button 
+              variant={activeCategory === "languages" ? "default" : "outline"} 
+              onClick={() => setActiveCategory("languages")}
+              className={activeCategory === "languages" ? "bg-accent text-background hover:bg-accent/90" : ""}
+            >
+              Languages
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger">
             {filteredSkills.map((skill, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
-                <div className="flex items-center mb-4">
-                  <div className="mr-3 text-primary">{skill.icon}</div>
-                  <h3 className="font-medium">{skill.name}</h3>
+              <div key={index} className="bg-card rounded-lg p-6 shadow-md border border-border hover:border-accent/30 transition-all">
+                <div className="mb-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-accent/10 text-accent">
+                    {skill.icon}
+                  </div>
                 </div>
+                <h3 className="font-medium mb-3">{skill.name}</h3>
                 
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                <div className="w-full bg-secondary rounded-full h-2">
                   <div 
-                    className="bg-primary h-2.5 rounded-full" 
+                    className="bg-accent h-2 rounded-full" 
                     style={{ 
                       width: `${skill.level}%`,
                       transition: "width 1s ease-in-out"
                     }}
                   ></div>
                 </div>
-                <div className="flex justify-between mt-1">
-                  <span className="text-xs text-muted-foreground">Beginner</span>
-                  <span className="text-xs text-muted-foreground">Expert</span>
+                <div className="flex justify-between mt-2">
+                  <span className="text-xs text-muted-foreground">{skill.level}%</span>
                 </div>
               </div>
             ))}
