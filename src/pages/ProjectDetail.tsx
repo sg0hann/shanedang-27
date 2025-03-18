@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calendar, FileText, Github, Globe, Link as LinkIcon } from "lucide-react";
+import { ArrowLeft, Calendar } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getProjects, Project } from "@/components/sections/ProjectsSection";
@@ -96,35 +96,6 @@ export function ProjectDetail() {
                 measurable improvements in efficiency, decision-making processes, and overall 
                 performance metrics.
               </p>
-            </div>
-            
-            <div className="flex flex-wrap justify-between items-center border-t border-border pt-6">
-              <div className="flex space-x-3">
-                <Button variant="outline" size="sm" className="gap-2" asChild>
-                  <a href="#" target="_blank" rel="noreferrer">
-                    <Github className="h-4 w-4" />
-                    <span>Source</span>
-                  </a>
-                </Button>
-                <Button variant="outline" size="sm" className="gap-2" asChild>
-                  <a href="#" target="_blank" rel="noreferrer">
-                    <FileText className="h-4 w-4" />
-                    <span>Documentation</span>
-                  </a>
-                </Button>
-                <Button variant="outline" size="sm" className="gap-2" asChild>
-                  <a href="#" target="_blank" rel="noreferrer">
-                    <Globe className="h-4 w-4" />
-                    <span>Live Demo</span>
-                  </a>
-                </Button>
-              </div>
-              
-              <Button asChild>
-                <Link to="/contact">
-                  <span>Discuss this project</span>
-                </Link>
-              </Button>
             </div>
           </div>
         </div>

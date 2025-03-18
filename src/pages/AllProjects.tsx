@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import { getProjects } from "@/components/sections/ProjectsSection";
 import { useAnalytics } from "@/utils/analytics";
 
-type ProjectCategory = "all" | "data-analysis" | "dashboard" | "process-optimization";
+type ProjectCategory = "all" | "website" | "mobile-app" | "dashboard-cms";
 
 export function AllProjects() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
@@ -62,25 +62,25 @@ export function AllProjects() {
               All
             </Button>
             <Button 
-              variant={activeCategory === "data-analysis" ? "default" : "outline"} 
-              onClick={() => setActiveCategory("data-analysis")}
-              className={activeCategory === "data-analysis" ? "bg-blue-600 hover:bg-blue-700" : "text-blue-700 hover:bg-blue-50"}
+              variant={activeCategory === "website" ? "default" : "outline"} 
+              onClick={() => setActiveCategory("website")}
+              className={activeCategory === "website" ? "bg-blue-600 hover:bg-blue-700" : "text-blue-700 hover:bg-blue-50"}
             >
-              Data Analysis
+              Website
             </Button>
             <Button 
-              variant={activeCategory === "dashboard" ? "default" : "outline"} 
-              onClick={() => setActiveCategory("dashboard")}
-              className={activeCategory === "dashboard" ? "bg-blue-600 hover:bg-blue-700" : "text-blue-700 hover:bg-blue-50"}
+              variant={activeCategory === "mobile-app" ? "default" : "outline"} 
+              onClick={() => setActiveCategory("mobile-app")}
+              className={activeCategory === "mobile-app" ? "bg-blue-600 hover:bg-blue-700" : "text-blue-700 hover:bg-blue-50"}
             >
-              Dashboard
+              Mobile App
             </Button>
             <Button 
-              variant={activeCategory === "process-optimization" ? "default" : "outline"} 
-              onClick={() => setActiveCategory("process-optimization")}
-              className={activeCategory === "process-optimization" ? "bg-blue-600 hover:bg-blue-700" : "text-blue-700 hover:bg-blue-50"}
+              variant={activeCategory === "dashboard-cms" ? "default" : "outline"} 
+              onClick={() => setActiveCategory("dashboard-cms")}
+              className={activeCategory === "dashboard-cms" ? "bg-blue-600 hover:bg-blue-700" : "text-blue-700 hover:bg-blue-50"}
             >
-              Process Optimization
+              Dashboard - CMS
             </Button>
           </div>
           
@@ -109,20 +109,7 @@ export function AllProjects() {
                     }
                   </div>
                   
-                  <div className="flex justify-between items-center">
-                    <div className="flex space-x-2">
-                      <Button variant="ghost" size="icon" asChild className="text-gray-600 hover:text-blue-700 hover:bg-blue-50">
-                        <a href="#" aria-label="Source code">
-                          <Github className="h-4 w-4" />
-                        </a>
-                      </Button>
-                      <Button variant="ghost" size="icon" asChild className="text-gray-600 hover:text-blue-700 hover:bg-blue-50">
-                        <a href="#" aria-label="Documentation">
-                          <FileText className="h-4 w-4" />
-                        </a>
-                      </Button>
-                    </div>
-                    
+                  <div className="flex justify-end items-center">
                     <Button variant="outline" size="sm" className="gap-1 text-blue-700 border-blue-200 hover:bg-blue-50" asChild>
                       <Link to={`/projects/${project.id}`}>
                         <span>View Details</span>

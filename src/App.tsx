@@ -11,6 +11,7 @@ import AllProjects from "./pages/AllProjects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Dashboard from "./pages/Admin/Dashboard";
 import Projects from "./pages/Admin/Projects";
+import ProjectEditor from "./pages/Admin/ProjectEditor";
 import Settings from "./pages/Admin/Settings";
 import NotFound from "./pages/NotFound";
 import { AuthProvider, useAuth } from "./utils/auth";
@@ -58,6 +59,11 @@ const App = () => {
                 <Route path="/admin/projects" element={
                   <ProtectedRoute>
                     <Projects />
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin/project-editor/:projectId" element={
+                  <ProtectedRoute>
+                    <ProjectEditor />
                   </ProtectedRoute>
                 } />
                 <Route path="/admin/settings" element={

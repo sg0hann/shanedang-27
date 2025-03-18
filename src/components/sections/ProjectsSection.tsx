@@ -149,20 +149,7 @@ export function ProjectsSection() {
                   }
                 </div>
                 
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-2">
-                    <Button variant="ghost" size="icon" asChild>
-                      <a href="#" aria-label="Source code">
-                        <Github className="h-4 w-4" />
-                      </a>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild>
-                      <a href="#" aria-label="Documentation">
-                        <FileText className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  </div>
-                  
+                <div className="flex justify-end items-center">
                   <Button variant="outline" size="sm" className="gap-1" asChild>
                     <Link to={`/projects/${project.id}`}>
                       <span>View Details</span>
