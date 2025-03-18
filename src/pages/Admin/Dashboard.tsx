@@ -7,13 +7,13 @@ import { BarChart, UsersRound, Clock, MousePointerClick, MessageSquare, Mail } f
 import AdminLayout from "@/components/admin/AdminLayout";
 
 const Dashboard = () => {
-  const { visitorData } = useAnalytics();
-  const { recordPageView } = useAnalytics();
+  const { visitorData, recordPageView } = useAnalytics();
   
   useEffect(() => {
+    // Record page view - only once when component mounts
     recordPageView("/admin");
     document.title = "Admin Dashboard | Portfolio";
-  }, [recordPageView]);
+  }, [recordPageView]); // Add recordPageView as a dependency
   
   const totalPageViews = Object.values(visitorData.pageViews).reduce((sum, count) => sum + count, 0);
   

@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 type VisitorData = {
@@ -29,6 +28,7 @@ type AnalyticsContextType = {
   recordPageView: (path: string) => void;
   addContactRequest: (request: Omit<ContactRequest, "date">) => void;
   recordVisitorEmail: (email: string) => void;
+  resetAnalytics: () => void;
 };
 
 const defaultVisitorData: VisitorData = {
@@ -39,6 +39,9 @@ const defaultVisitorData: VisitorData = {
   contactRequests: [],
   visitorEmails: []
 };
+
+// Create a map to track which pages have been visited in the current session
+const sessionPageViews = new Map<string, boolean>();
 
 const AnalyticsContext = createContext<AnalyticsContextType | undefined>(undefined);
 
@@ -81,6 +84,8 @@ export const AnalyticsProvider = ({ children }: { children: ReactNode }) => {
     // Clean up session when the window is closed
     const handleBeforeUnload = () => {
       sessionStorage.removeItem("sessionActive");
+      // Clear the session page views map when the window is closed
+      sessionPageViews.clear();
     };
     
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -92,16 +97,21 @@ export const AnalyticsProvider = ({ children }: { children: ReactNode }) => {
   }, [sessionStarted]);
 
   const recordPageView = (path: string) => {
-    setVisitorData(prev => {
-      const updatedPageViews = { ...prev.pageViews };
-      updatedPageViews[path] = (updatedPageViews[path] || 0) + 1;
+    // Only count a page view once per session for each unique path
+    if (!sessionPageViews.has(path)) {
+      sessionPageViews.set(path, true);
       
-      return {
-        ...prev,
-        pageViews: updatedPageViews,
-        lastUpdated: new Date().toISOString()
-      };
-    });
+      setVisitorData(prev => {
+        const updatedPageViews = { ...prev.pageViews };
+        updatedPageViews[path] = (updatedPageViews[path] || 0) + 1;
+        
+        return {
+          ...prev,
+          pageViews: updatedPageViews,
+          lastUpdated: new Date().toISOString()
+        };
+      });
+    }
   };
   
   const addContactRequest = (request: Omit<ContactRequest, "date">) => {
@@ -155,9 +165,34 @@ export const AnalyticsProvider = ({ children }: { children: ReactNode }) => {
       };
     });
   };
+  
+  // Add a function to reset analytics
+  const resetAnalytics = () => {
+    // Clear session storage
+    sessionStorage.removeItem("sessionActive");
+    // Clear session page views map
+    sessionPageViews.clear();
+    // Reset visitor data to defaults but keep collected emails and contact requests
+    setVisitorData(prev => ({
+      ...defaultVisitorData,
+      uniqueVisitors: 0, // Reset unique visitors
+      totalVisits: 0, // Reset total visits
+      pageViews: {}, // Reset page views
+      lastUpdated: new Date().toISOString(),
+      // Keep existing contact data
+      contactRequests: prev.contactRequests,
+      visitorEmails: prev.visitorEmails
+    }));
+  };
 
   return (
-    <AnalyticsContext.Provider value={{ visitorData, recordPageView, addContactRequest, recordVisitorEmail }}>
+    <AnalyticsContext.Provider value={{ 
+      visitorData, 
+      recordPageView, 
+      addContactRequest, 
+      recordVisitorEmail,
+      resetAnalytics 
+    }}>
       {children}
     </AnalyticsContext.Provider>
   );

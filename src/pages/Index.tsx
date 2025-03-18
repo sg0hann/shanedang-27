@@ -13,7 +13,7 @@ import ContactSection from "@/components/sections/ContactSection";
 import { useAnalytics } from "@/utils/analytics";
 
 const Index = () => {
-  const { recordPageView } = useAnalytics();
+  const { recordPageView, resetAnalytics } = useAnalytics();
   
   useEffect(() => {
     // Record page view - only once when component mounts
@@ -38,10 +38,15 @@ const Index = () => {
       }
     }
     
+    // Reset analytics data if URL has a reset parameter
+    if (window.location.search.includes('reset=true')) {
+      resetAnalytics();
+    }
+    
     return () => {
       document.documentElement.style.scrollBehavior = "auto";
     };
-  }, []); 
+  }, [recordPageView, resetAnalytics]); 
   
   // Handle smooth scrolling for anchor links
   useEffect(() => {
