@@ -2,9 +2,8 @@
 import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuth } from "@/utils/auth";
 import { useAnalytics } from "@/utils/analytics";
-import { BarChart, UsersRound, Clock, MousePointerClick, MessageSquare } from "lucide-react";
+import { BarChart, UsersRound, Clock, MousePointerClick, MessageSquare, Mail } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
 
 const Dashboard = () => {
@@ -84,13 +83,14 @@ const Dashboard = () => {
         
         <Card className="col-span-1 md:col-span-2 lg:col-span-4">
           <CardHeader>
-            <CardTitle>Page View Analysis</CardTitle>
+            <CardTitle>Analytics</CardTitle>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="table">
               <TabsList>
-                <TabsTrigger value="table">Table</TabsTrigger>
+                <TabsTrigger value="table">Page Views</TabsTrigger>
                 <TabsTrigger value="chart">Chart</TabsTrigger>
+                <TabsTrigger value="visitors">Visitor Emails</TabsTrigger>
                 <TabsTrigger value="contacts">Contact Messages</TabsTrigger>
               </TabsList>
               <TabsContent value="table" className="space-y-4">
@@ -117,6 +117,36 @@ const Dashboard = () => {
                 <div className="h-[300px] flex items-center justify-center border rounded-md">
                   <p className="text-muted-foreground">Data chart will be displayed here</p>
                 </div>
+              </TabsContent>
+              <TabsContent value="visitors" className="space-y-4">
+                {visitorData.visitorEmails && visitorData.visitorEmails.length > 0 ? (
+                  <div className="rounded-md border">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b bg-muted/50">
+                          <th className="h-10 px-4 text-left font-medium">Email</th>
+                          <th className="h-10 px-4 text-left font-medium">First Visit</th>
+                          <th className="h-10 px-4 text-left font-medium">Last Visit</th>
+                          <th className="h-10 px-4 text-right font-medium">Visit Count</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {visitorData.visitorEmails.map((visitor, index) => (
+                          <tr key={index} className="border-b">
+                            <td className="p-4">{visitor.email}</td>
+                            <td className="p-4">{new Date(visitor.firstVisit).toLocaleDateString()}</td>
+                            <td className="p-4">{new Date(visitor.lastVisit).toLocaleDateString()}</td>
+                            <td className="p-4 text-right">{visitor.visitCount}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center h-40 border rounded-md">
+                    <p className="text-muted-foreground">No visitor emails have been collected yet</p>
+                  </div>
+                )}
               </TabsContent>
               <TabsContent value="contacts" className="space-y-4">
                 {visitorData.contactRequests && visitorData.contactRequests.length > 0 ? (
