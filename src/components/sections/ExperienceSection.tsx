@@ -35,7 +35,7 @@ const experiences = [
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-20">
+    <section id="experience" className="py-20 bg-gradient-to-b from-background to-gray-900/50">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="section-title text-center mx-auto">Work Experience</h2>
@@ -45,43 +45,43 @@ export function ExperienceSection() {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="relative border-l-2 border-primary/30 pl-8 ml-8 md:ml-12 space-y-12">
+          <div className="relative border-l-2 border-accent/30 pl-8 ml-8 md:ml-12 space-y-12">
             {experiences.map((experience, index) => (
               <div key={index} className="relative animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
-                <div className="absolute -left-14 flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 border border-primary/30 text-primary">
+                <div className="absolute -left-14 flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 border border-accent/30 text-accent shadow-[0_0_10px_rgba(132,204,22,0.3)]">
                   <Briefcase className="h-5 w-5" />
                 </div>
                 
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <span className="inline-block bg-primary/10 text-primary text-xs font-medium px-2.5 py-0.5 rounded mb-2">
+                <div className="bg-gray-900/50 rounded-lg shadow-md p-6 hover:shadow-[0_0_15px_rgba(132,204,22,0.2)] transition-all duration-300 border border-accent/10 backdrop-blur-sm">
+                  <span className="inline-block bg-accent/10 text-accent text-xs font-medium px-2.5 py-0.5 rounded mb-2">
                     {experience.period}
                   </span>
                   
-                  <h3 className="text-xl font-semibold">{experience.title}</h3>
-                  <p className="text-primary font-medium mb-4">{experience.company}</p>
+                  <h3 className="text-xl font-semibold text-white">{experience.title}</h3>
+                  <p className="text-accent font-medium mb-4">{experience.company}</p>
                   
-                  <p className="text-muted-foreground mb-4">{experience.description}</p>
+                  <p className="text-gray-300 mb-4">{experience.description}</p>
                   
                   {experience.domain && (
                     <div className="mb-4">
-                      <h4 className="font-medium text-sm uppercase text-muted-foreground mb-2">Domain Knowledge:</h4>
+                      <h4 className="font-medium text-sm uppercase text-gray-400 mb-2">Domain Knowledge:</h4>
                       <ul className="space-y-1">
                         {experience.domain.map((item, i) => (
                           <li key={i} className="flex items-start gap-2">
-                            <span className="text-primary font-bold">•</span>
-                            <span className="text-sm">{item}</span>
+                            <span className="text-accent font-bold">•</span>
+                            <span className="text-sm text-gray-300">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                   )}
                   
-                  <h4 className="font-medium text-sm uppercase text-muted-foreground mb-2">Main Responsibilities:</h4>
+                  <h4 className="font-medium text-sm uppercase text-gray-400 mb-2">Main Responsibilities:</h4>
                   <ul className="space-y-1">
                     {experience.achievements.map((achievement, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <span className="text-primary font-bold">•</span>
-                        <span className="text-sm">{achievement}</span>
+                        <span className="text-accent font-bold">•</span>
+                        <span className="text-sm text-gray-300">{achievement}</span>
                       </li>
                     ))}
                   </ul>

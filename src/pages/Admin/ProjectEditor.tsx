@@ -8,12 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { ArrowLeft, Save, Image, LayoutGrid, FileText, Settings, Plus, X, FileUp, Youtube, ExternalLink, FileCode } from "lucide-react";
+import { ArrowLeft, Save, Image, LayoutGrid, FileText, Settings, X, FileUp, Youtube, ExternalLink, FileCode } from "lucide-react";
 import { toast } from "sonner";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { getProjects, Project } from "@/components/sections/ProjectsSection";
-import { useForm } from "react-hook-form";
 
 interface ProjectMedia {
   id: string;
@@ -193,7 +191,7 @@ const ProjectEditor = () => {
       <div className="flex flex-col min-h-[calc(100vh-65px)]">
         <div className="flex items-center justify-between border-b p-4">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/admin/projects")}>
+            <Button variant="ghost" size="icon" onClick={() => navigate("/admin/projects")} className="hover:bg-accent/10 transition-all duration-200 hover:text-accent">
               <ArrowLeft className="h-5 w-5" />
             </Button>
             <h1 className="text-xl font-semibold">
@@ -201,7 +199,7 @@ const ProjectEditor = () => {
             </h1>
           </div>
           
-          <Button onClick={handleSave} className="gap-2">
+          <Button onClick={handleSave} className="gap-2 hover:bg-accent/90 transition-all duration-300 hover:scale-105">
             <Save className="h-4 w-4" />
             Save Project
           </Button>
@@ -218,28 +216,28 @@ const ProjectEditor = () => {
               <TabsList className="flex lg:flex-col w-full h-auto bg-transparent gap-1">
                 <TabsTrigger 
                   value="general" 
-                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50"
+                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50 hover:bg-accent/10 transition-all duration-200"
                 >
                   <LayoutGrid className="h-4 w-4" />
                   <span>General</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="content" 
-                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50"
+                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50 hover:bg-accent/10 transition-all duration-200"
                 >
                   <FileText className="h-4 w-4" />
                   <span>Content</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="media" 
-                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50"
+                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50 hover:bg-accent/10 transition-all duration-200"
                 >
                   <Image className="h-4 w-4" />
                   <span>Media</span>
                 </TabsTrigger>
                 <TabsTrigger 
                   value="settings" 
-                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50"
+                  className="w-full justify-start py-2 px-3 gap-2 data-[state=active]:bg-secondary/50 hover:bg-accent/10 transition-all duration-200"
                 >
                   <Settings className="h-4 w-4" />
                   <span>Settings</span>
@@ -366,7 +364,7 @@ const ProjectEditor = () => {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="gap-1"
+                        className="gap-1 hover:bg-accent/10 hover:text-accent transition-all duration-200"
                         onClick={() => fileInputRef.current?.click()}
                       >
                         <FileUp className="h-4 w-4" />
@@ -375,7 +373,7 @@ const ProjectEditor = () => {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="gap-1"
+                        className="gap-1 hover:bg-accent/10 hover:text-accent transition-all duration-200"
                         onClick={handleAddVideoMedia}
                       >
                         <Youtube className="h-4 w-4" />
@@ -392,25 +390,25 @@ const ProjectEditor = () => {
                   </div>
                   
                   {mediaList.length === 0 ? (
-                    <div className="border-2 border-dashed rounded-lg p-12 text-center">
+                    <div className="border-2 border-dashed rounded-lg p-12 text-center border-accent/20">
                       <Image className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                       <p className="text-muted-foreground">
                         No media added yet. Upload images or add videos to your project.
                       </p>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div className="space-y-4">
                       {mediaList.map((media) => (
-                        <Card key={media.id} className="relative overflow-hidden group">
+                        <Card key={media.id} className="relative overflow-hidden group border-accent/20 hover:border-accent/40 transition-all duration-300">
                           {media.type === 'image' ? (
-                            <div className="aspect-video relative">
+                            <div className="relative">
                               <img 
                                 src={media.url} 
                                 alt="Project media"
-                                className="w-full h-full object-cover"
+                                className="w-full h-auto object-cover"
                               />
                               {media.isMain && (
-                                <div className="absolute top-2 left-2 bg-primary text-white text-xs py-1 px-2 rounded">
+                                <div className="absolute top-2 left-2 bg-accent text-black text-xs py-1 px-2 rounded">
                                   Main Image
                                 </div>
                               )}
@@ -438,7 +436,7 @@ const ProjectEditor = () => {
                                   <Button 
                                     size="sm" 
                                     variant="ghost" 
-                                    className="h-7 w-7 p-0"
+                                    className="h-7 w-7 p-0 hover:bg-accent/10 hover:text-accent transition-all duration-200"
                                     onClick={() => handleSetMainImage(media.id)}
                                   >
                                     <Image className="h-4 w-4" />
@@ -447,7 +445,7 @@ const ProjectEditor = () => {
                                 <Button 
                                   size="sm" 
                                   variant="ghost" 
-                                  className="h-7 w-7 p-0 text-destructive hover:text-destructive"
+                                  className="h-7 w-7 p-0 text-destructive hover:text-destructive hover:bg-destructive/10 transition-all duration-200"
                                   onClick={() => handleRemoveMedia(media.id)}
                                 >
                                   <X className="h-4 w-4" />
@@ -476,7 +474,7 @@ const ProjectEditor = () => {
                   />
                 </div>
                 
-                <div className="border rounded-lg p-4 bg-red-50 text-red-800 mt-8">
+                <div className="border rounded-lg p-4 bg-red-950/20 text-red-400 mt-8 border-red-500/30">
                   <h3 className="font-medium mb-2">Danger Zone</h3>
                   <p className="text-sm mb-4">Once you delete a project, there is no going back.</p>
                   
@@ -492,6 +490,7 @@ const ProjectEditor = () => {
                           navigate("/admin/projects");
                         }
                       }}
+                      className="hover:bg-destructive/80 transition-all duration-200"
                     >
                       Delete this project
                     </Button>

@@ -41,7 +41,7 @@ export function ProjectDetail() {
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <Button variant="ghost" asChild className="gap-2 hover:bg-accent/10 hover:text-accent">
+            <Button variant="ghost" asChild className="gap-2 hover:bg-accent/10 hover:text-accent transition-all duration-300 hover:scale-105">
               <Link to="/projects">
                 <ArrowLeft className="h-4 w-4" />
                 <span>Back to Projects</span>
@@ -67,7 +67,7 @@ export function ProjectDetail() {
               </div>
               <div className="flex gap-2">
                 {project.docsLink && (
-                  <Button variant="outline" size="sm" asChild className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent">
+                  <Button variant="outline" size="sm" asChild className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent transition-all duration-300 hover:scale-105">
                     <a href={project.docsLink} target="_blank" rel="noopener noreferrer">
                       <FileCode className="h-4 w-4" />
                       <span>Documentation</span>
@@ -75,7 +75,7 @@ export function ProjectDetail() {
                   </Button>
                 )}
                 {project.demoLink && (
-                  <Button variant="outline" size="sm" asChild className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent">
+                  <Button variant="outline" size="sm" asChild className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent transition-all duration-300 hover:scale-105">
                     <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4" />
                       <span>Live Demo</span>
@@ -105,17 +105,17 @@ export function ProjectDetail() {
             {project.media && project.media.length > 0 && (
               <div className="mt-10">
                 <h2 className="text-2xl font-semibold mb-6">Project Gallery</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-6">
                   {project.media.map((media, index) => (
-                    <div key={index} className="rounded-lg overflow-hidden border border-border bg-card hover:border-accent/30 transition-all">
+                    <div key={index} className="rounded-lg overflow-hidden border border-border bg-card hover:border-accent/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(132,204,22,0.2)]">
                       {media.type === 'image' ? (
                         <img 
                           src={media.url} 
                           alt={`${project.title} - Image ${index + 1}`}
-                          className="w-full h-64 object-cover"
+                          className="w-full h-auto object-cover"
                         />
                       ) : (
-                        <div className="h-64 bg-black">
+                        <div className="aspect-video bg-black">
                           <iframe 
                             src={media.url.includes('youtube') 
                               ? media.url.replace('watch?v=', 'embed/') 

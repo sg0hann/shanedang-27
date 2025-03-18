@@ -77,28 +77,28 @@ export function ProjectsSection() {
             <Button 
               variant={activeCategory === "all" ? "default" : "outline"} 
               onClick={() => setActiveCategory("all")}
-              className={activeCategory === "all" ? "bg-accent text-background hover:bg-accent/90" : ""}
+              className={`transition-all duration-300 hover:scale-105 ${activeCategory === "all" ? "bg-accent text-background hover:bg-accent/90" : ""}`}
             >
               All
             </Button>
             <Button 
               variant={activeCategory === "website" ? "default" : "outline"} 
               onClick={() => setActiveCategory("website")}
-              className={activeCategory === "website" ? "bg-accent text-background hover:bg-accent/90" : ""}
+              className={`transition-all duration-300 hover:scale-105 ${activeCategory === "website" ? "bg-accent text-background hover:bg-accent/90" : ""}`}
             >
               Website
             </Button>
             <Button 
               variant={activeCategory === "mobile-app" ? "default" : "outline"} 
               onClick={() => setActiveCategory("mobile-app")}
-              className={activeCategory === "mobile-app" ? "bg-accent text-background hover:bg-accent/90" : ""}
+              className={`transition-all duration-300 hover:scale-105 ${activeCategory === "mobile-app" ? "bg-accent text-background hover:bg-accent/90" : ""}`}
             >
               Mobile App
             </Button>
             <Button 
               variant={activeCategory === "dashboard-cms" ? "default" : "outline"} 
               onClick={() => setActiveCategory("dashboard-cms")}
-              className={activeCategory === "dashboard-cms" ? "bg-accent text-background hover:bg-accent/90" : ""}
+              className={`transition-all duration-300 hover:scale-105 ${activeCategory === "dashboard-cms" ? "bg-accent text-background hover:bg-accent/90" : ""}`}
             >
               Dashboard - CMS
             </Button>
@@ -111,7 +111,7 @@ export function ProjectsSection() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
               {displayedProjects.map((project, index) => (
-                <Card key={index} className="overflow-hidden group border-border bg-card hover:border-accent/30 transition-all">
+                <Card key={index} className="overflow-hidden group border-border bg-card hover:border-accent/30 transition-all duration-300 hover:shadow-[0_0_15px_rgba(132,204,22,0.3)] hover:-translate-y-1">
                   <div className="h-60 overflow-hidden relative">
                     <img 
                       src={project.imageUrl || project.image} 
@@ -168,7 +168,7 @@ export function ProjectsSection() {
                           </a>
                         )}
                       </div>
-                      <Button variant="outline" size="sm" className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent" asChild>
+                      <Button variant="outline" size="sm" className="gap-1 border-accent/30 text-accent hover:bg-accent/10 hover:text-accent transition-all duration-300 hover:scale-105" asChild>
                         <Link to={`/projects/${project.id}`}>
                           <span>View Details</span>
                           <ArrowRight className="h-3 w-3" />
@@ -183,7 +183,7 @@ export function ProjectsSection() {
           
           {projectsData.length > 0 && (
             <div className="mt-12 text-center">
-              <Button asChild size="lg" className="gap-2 bg-accent text-background hover:bg-accent/90">
+              <Button asChild size="lg" className="gap-2 bg-accent text-background hover:bg-accent/90 hover:scale-105 transition-all duration-300">
                 <Link to="/projects">
                   <span>View All Projects</span>
                   <ArrowRight className="h-4 w-4" />
