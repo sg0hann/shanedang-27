@@ -12,19 +12,19 @@ interface Education {
 
 const educationData: Education[] = [
   {
-    degree: "Bachelor of Business and Management",
-    institution: "University of Economics",
+    degree: "International Business",
+    institution: "University of Economics Ho Chi Minh City",
     location: "Ho Chi Minh City, Vietnam",
-    period: "2016 - 2020",
-    description: "Focused on business administration, strategic management, and data analysis principles. GPA: 7.9/10",
+    period: "07/2022 - 11/2024",
+    description: "Focused on business administration, strategic management, and international business principles.",
     link: "https://www.ueh.edu.vn/"
   },
   {
-    degree: "Aviation Management",
+    degree: "Air Traffic Controller",
     institution: "Vietnam Aviation Academy",
     location: "Ho Chi Minh City, Vietnam",
-    period: "2018 - 2019",
-    description: "Specialized training in aviation management, airline operations, and industry regulations.",
+    period: "02/2018 - 12/2022",
+    description: "Specialized training in aviation management, airline operations, and air traffic control protocols.",
     link: "https://vaa.edu.vn/"
   }
 ];

@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ChevronDown, FileText, Mail, Linkedin } from "lucide-react";
+import { ChevronDown, FileText, Mail, Linkedin, Phone, MapPin, Calendar } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -22,26 +22,45 @@ export function HeroSection() {
             
             <h1 className="animate-slide-in-bottom text-4xl md:text-6xl font-bold mb-6 text-white">
               <span className="block">Đặng Mc Cormick Shane</span>
-              <span className="gradient-text">Business Analyst</span>
+              <span className="gradient-text text-white">Business Analyst</span>
             </h1>
             
-            <p className="animate-slide-in-bottom animate-delay-200 text-lg md:text-xl text-white mb-10">
+            <p className="animate-slide-in-bottom animate-delay-200 text-lg md:text-xl text-white mb-6">
               A goal-driven individual with a solid grounding in Business Development, looking forward to embracing the challenges of a Business Analyst position.
             </p>
+            
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start text-white mb-8 animate-slide-in-bottom animate-delay-200">
+              <div className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-primary" />
+                <span>0978493317</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-primary" />
+                <span>shane.mccormick0212@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span>Vietnamese, TP Hồ Chí Minh</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-primary" />
+                <span>02/12/1999</span>
+              </div>
+            </div>
             
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 animate-slide-in-bottom animate-delay-300">
               <Button size="lg" className="gap-2 h-12">
                 <Mail className="h-4 w-4" />
                 <span>Contact Me</span>
               </Button>
-              <Button variant="outline" size="lg" className="gap-2 h-12 text-white border-white/40 hover:bg-white/10" asChild>
+              <Button variant="outline" size="lg" className="gap-2 h-12 bg-white/10 hover:bg-white/20 border-white/40" asChild>
                 <a 
                   href="https://drive.google.com/file/d/1cbCabG0ZvB0pEpNAXGG6UuHbKm8db8db/view?usp=sharing" 
                   target="_blank" 
                   rel="noreferrer"
                 >
-                  <FileText className="h-4 w-4" />
-                  <span>View CV</span>
+                  <FileText className="h-4 w-4 text-white" />
+                  <span className="text-white">View CV</span>
                 </a>
               </Button>
               <Button variant="ghost" size="icon" className="h-12 w-12 text-white hover:bg-white/10" asChild>

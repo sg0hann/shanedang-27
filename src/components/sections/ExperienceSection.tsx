@@ -6,13 +6,17 @@ const experiences = [
     title: "Business Development Associate",
     company: "Orient Software Development Corporation",
     period: "03/2023 - 03/2024",
-    description: "Analyzed business requirements, developed specifications, and supported the implementation of software solutions. Worked closely with IT teams and stakeholders.",
+    description: "Analyzed business requirements, developed specifications, and supported the implementation of software solutions.",
     achievements: [
       "Experienced in discussing with clients to gather detailed software product requirements and creating comprehensive user guides",
       "Skilled in collaborating with stakeholders to elicit, document, and analyze business needs and challenges",
       "Utilized feedback analysis to enhance product effectiveness and user satisfaction",
       "Worked with international teams to understand global market trends and customer requirements",
       "Organized and delivered end-user training, ensuring clients effectively use and understand software products"
+    ],
+    domain: [
+      "CRM (Customer Relationship Management)",
+      "HRM (Human Resource Management)"
     ]
   },
   {
@@ -31,7 +35,7 @@ const experiences = [
     title: "Air Traffic Controller",
     company: "Vietnam Aviation Academy",
     period: "02/2018 - 12/2022",
-    description: "Trained in air traffic control and aviation management systems",
+    description: "Trained in air traffic control and aviation management systems.",
     achievements: [
       "Completed specialized training in air traffic control protocols and procedures",
       "Developed strong communication and decision-making skills under pressure",
@@ -69,7 +73,21 @@ export function ExperienceSection() {
                   
                   <p className="text-muted-foreground mb-4">{experience.description}</p>
                   
-                  <h4 className="font-medium text-sm uppercase text-muted-foreground mb-2">Key achievements:</h4>
+                  {experience.domain && (
+                    <div className="mb-4">
+                      <h4 className="font-medium text-sm uppercase text-muted-foreground mb-2">Domain Knowledge:</h4>
+                      <ul className="space-y-1">
+                        {experience.domain.map((item, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-primary font-bold">•</span>
+                            <span className="text-sm">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  <h4 className="font-medium text-sm uppercase text-muted-foreground mb-2">Main Responsibilities:</h4>
                   <ul className="space-y-1">
                     {experience.achievements.map((achievement, i) => (
                       <li key={i} className="flex items-start gap-2">

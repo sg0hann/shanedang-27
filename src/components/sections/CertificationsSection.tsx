@@ -7,6 +7,7 @@ interface Certification {
   date: string;
   description: string;
   link?: string;
+  grade?: string;
 }
 
 const certifications: Certification[] = [
@@ -36,14 +37,15 @@ const certifications: Certification[] = [
     issuer: "Mind X Technology School",
     date: "01/2024",
     description: "Comprehensive training in IT business analysis focusing on requirements gathering and documentation.",
-    link: "https://drive.google.com/file/d/1UaYCtbkJk5F0DAMsJdbLVaq8nOI0JvHP/vie"
+    link: "https://drive.google.com/file/d/1UaYCtbkJk5F0DAMsJdbLVaq8nOI0JvHP/view"
   },
   {
     title: "The Test of English for International Communication",
     issuer: "IIG",
     date: "11/2022",
-    description: "Certification of English language proficiency for international business communication. Score: 910/990",
-    link: "https://drive.google.com/file/d/1mFWQF8ibRc1oOu3YkF2B6QIpNusxVAVm/vie"
+    description: "Certification of English language proficiency for international business communication.",
+    grade: "910/990",
+    link: "https://drive.google.com/file/d/1mFWQF8ibRc1oOu3YkF2B6QIpNusxVAVm/view"
   }
 ];
 
@@ -80,7 +82,10 @@ export function CertificationsSection() {
                     </div>
                     
                     <p className="text-primary font-medium text-sm mb-2">{cert.issuer}</p>
-                    <p className="text-muted-foreground text-sm mb-4">{cert.description}</p>
+                    <p className="text-muted-foreground text-sm mb-4">
+                      {cert.description}
+                      {cert.grade && <span className="font-medium ml-2">Score: {cert.grade}</span>}
+                    </p>
                     
                     {cert.link && (
                       <a 
